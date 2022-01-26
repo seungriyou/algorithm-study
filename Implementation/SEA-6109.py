@@ -1,15 +1,19 @@
 # [SEA] 6109 - 추억의 2048게임
 
+import sys
 from typing import List
 
-f = open('input.txt', 'r')
-game_maps = []
-for i in range(int(f.readline())):
-    l, d = f.readline().split()
-    game_map = []
-    for _ in range(int(l)):
-        game_map.append(list(map(int, f.readline().split())))
-    game_maps.append((i+1, d, game_map))
+sys.stdin = open('input.txt')
+input = sys.stdin.readline
+
+# f = open('input.txt', 'r')
+# game_maps = []
+# for i in range(int(f.readline())):
+#     l, d = f.readline().split()
+#     game_map = []
+#     for _ in range(int(l)):
+#         game_map.append(list(map(int, f.readline().split())))
+#     game_maps.append((i+1, d, game_map))
 
 
 def rotate_map(game_map: List[int]) -> List[int]:
@@ -27,11 +31,9 @@ def move_tiles(game_map: List[int]) -> List[int]:
         return game_map
     for i in range(l):
         j, k = 0, 1
-
         for _ in range(game_map[i].count(0)):
             game_map[i].remove(0)
             game_map[i].append(0)
-
         while k < l:
             if game_map[i][j] == game_map[i][k]:
                 game_map[i][j] += game_map[i].pop(k)
@@ -45,16 +47,21 @@ def print_map(n: int, game_map: List[int]) -> None:
     l = len(game_map)
     print(f'#{n}')
     for i in range(l):
-        #print(' '.join(map(str, game_map[i])))
+        # print(' '.join(map(str, game_map[i])))
         print(*game_map[i])
 
 
-for i, d, game_map in game_maps:
+T = int(input())
+for test_case in range(1, T + 1):
+    l, d = map(str, input().split())
+    game_map = []
+    for _ in range(int(l)):
+        game_map.append(list(map(int, input().split())))
     if d == "up":
-        print_map(i, rotate_map(move_tiles(rotate_map(rotate_map(rotate_map(game_map))))))
+        print_map(test_case, rotate_map(move_tiles(rotate_map(rotate_map(rotate_map(game_map))))))
     elif d == "right":
-        print_map(i, rotate_map(rotate_map(move_tiles(rotate_map(rotate_map(game_map))))))
+        print_map(test_case, rotate_map(rotate_map(move_tiles(rotate_map(rotate_map(game_map))))))
     elif d == "down":
-        print_map(i, rotate_map(rotate_map(rotate_map(move_tiles(rotate_map(game_map))))))
+        print_map(test_case, rotate_map(rotate_map(rotate_map(move_tiles(rotate_map(game_map))))))
     else:
-        print_map(i, move_tiles(game_map))
+        print_map(test_case, move_tiles(game_map))
