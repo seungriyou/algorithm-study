@@ -11,7 +11,7 @@ def bellman_ford(start: int) -> bool:
     # 시작 노드로 가기 위한 최단 경로는 0
     distance[start] = 0
     # 최단 경로 구하기
-    for _ in range(n-1):
+    for _ in range(n - 1):
         # a번 노드 -> b번 노드 가는 거리가 c
         for a, b, c in graph:
             # 현재 노드를 거쳐서 다른 노드로 이동하는 거리가 더 짧은 경우
