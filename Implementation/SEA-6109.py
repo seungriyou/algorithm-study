@@ -6,15 +6,6 @@ from typing import List
 sys.stdin = open('input.txt')
 input = sys.stdin.readline
 
-# f = open('input.txt', 'r')
-# game_maps = []
-# for i in range(int(f.readline())):
-#     l, d = f.readline().split()
-#     game_map = []
-#     for _ in range(int(l)):
-#         game_map.append(list(map(int, f.readline().split())))
-#     game_maps.append((i+1, d, game_map))
-
 
 def rotate_map(game_map: List[int]) -> List[int]:
     l = len(game_map)
