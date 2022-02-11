@@ -3,7 +3,6 @@
 import sys
 import itertools
 from typing import List
-
 sys.stdin = open('input.txt')
 input = sys.stdin.readline
 
