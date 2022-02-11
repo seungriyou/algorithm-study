@@ -4,7 +4,6 @@ import sys
 
 sys.stdin = open('input.txt')
 input = sys.stdin.readline
-INF = int(1e9)
 
 
 def monkey(tree: str) -> int:
