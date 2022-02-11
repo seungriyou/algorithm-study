@@ -6,7 +6,6 @@ from typing import List
 
 sys.stdin = open('input.txt')
 input = sys.stdin.readline
-INF = int(1e9)
 
 
 def min_student(N: int, M: int, problems: List[int]) -> int:
