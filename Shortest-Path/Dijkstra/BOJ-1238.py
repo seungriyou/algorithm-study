@@ -2,12 +2,13 @@
 
 import sys
 import heapq
+from typing import List, Tuple, Optional
 
 sys.stdin = open('input.txt')
 input = sys.stdin.readline
 
 
-def dijkstra(graph, start):
+def dijkstra(graph: List[List[Optional[Tuple]]], start: int) -> List[int]:
     # 모든 사람에 대해 dijkstra를 수행해야하므로 distance list 초기화
     INF = int(1e9)
     distance = [INF] * (N + 1)
