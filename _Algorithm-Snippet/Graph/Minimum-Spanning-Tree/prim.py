@@ -34,7 +34,7 @@ for i in range(m):
 def prim(graph, start_node):
     visited[start_node] = 1
     candidate = graph[start_node] # 인접 간선
-    heapq.heapify(candidate) # 우선순위 큐 생성
+    heapq.heapify(candidate) # 우선순위 큐로 변환
     mst = list()
     total_weight = 0 # 전체 가중치
 
