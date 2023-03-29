@@ -7,10 +7,8 @@ m = int(input())
 graph = [[INF] * (n + 1) for _ in range(n + 1)]
 
 # 자기 자신 -> 자기 자신으로 가는 비용 = 0
-for a in range(1, n + 1):
-    for b in range(1, n + 1):
-        if a == b:
-            graph[a][b] = 0
+for i in range(1, n + 1):
+    graph[i][i] = 0
 
 # 각 간선에 대한 정보를 입력 받아 초기화
 for _ in range(m):
