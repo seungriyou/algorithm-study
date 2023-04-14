@@ -1,3 +1,5 @@
+# https://school.programmers.co.kr/learn/courses/30/lessons/42891
+
 """
 소요 시간이 작은 음식부터 그리디하게 처리
 우선순위 큐 말고 sort 써도 되지 않을까?
