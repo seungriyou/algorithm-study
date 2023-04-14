@@ -1,13 +1,15 @@
+# https://www.acmicpc.net/problem/14502
+
 from itertools import combinations
 from copy import deepcopy
 
 n, m = map(int, input().split())
-graph = [[] for _ in range(n)]
+graph = []
 walled_graph = [[0] * m for _ in range(n)]
 
 for i in range(n):
     row = list(map(int, input().split()))
-    graph[i].extend(row)
+    graph.append(row)
 
 dr = [1, -1, 0, 0]
 dc = [0, 0, -1, 1]
