@@ -5,7 +5,7 @@ from copy import deepcopy
 
 n, m = map(int, input().split())
 graph = []
-walled_graph = [[0] * m for _ in range(n)]
+# walled_graph = [[0] * m for _ in range(n)]
 
 for i in range(n):
     row = list(map(int, input().split()))

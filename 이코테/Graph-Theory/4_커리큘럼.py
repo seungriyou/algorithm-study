@@ -16,7 +16,7 @@ for i in range(1, n + 1):
 
 def topology_sort():
     q = deque()
-    acc_time = copy.deepcopy(time)
+    acc_time = copy.deepcopy(time) # or time[:]
 
     for i in range(1, n + 1):
         if indegree[i] == 0:
@@ -27,7 +27,7 @@ def topology_sort():
         for next_node in graph[now]:
             acc_time[next_node] = max(acc_time[next_node], acc_time[now] + time[next_node])
             indegree[next_node] -= 1
-            # 주의: indegree == 0 되는 노드는 다시 queue에 넣기5
+            # 주의: indegree == 0 되는 노드는 다시 queue에 넣기
             if indegree[next_node] == 0:
                 q.append(next_node)
     for i in range(1, n + 1):
