@@ -16,9 +16,7 @@ dy = [0, 0, -1, 1]
 def bfs(graph, x, y):
     # 주의: 시작점 방문 처리
     graph[x][y] = 0
-
     q = deque([(x, y)])
-
     cnt = 1
 
     while q:
