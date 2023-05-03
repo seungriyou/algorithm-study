@@ -23,7 +23,7 @@ VISITED = {
     2: 0
 }
 
-def bfs(x, y, c, step):
+def bfs(graph, x, y, c, step):
     # 주의: 시작점도 방문한 것으로 처리
     graph[x][y] = VISITED[step]
     q = deque([(x, y)])
@@ -50,20 +50,20 @@ def bfs(x, y, c, step):
 for i in range(n):
     for j in range(n):
         if graph[i][j] == "R":
-            if bfs(i, j, "R", 1):
+            if bfs(graph, i, j, "R", 1):
                 red += 1
         elif graph[i][j] == "G":
-            if bfs(i, j, "G", 1):
+            if bfs(graph, i, j, "G", 1):
                 green += 1
 
 # (2) R과 G 영역이 합쳐졌으므로, 다시 bfs를 수행한다.
 for i in range(n):
     for j in range(n):
         if graph[i][j] == "B":
-            if bfs(i, j, "B", 2):
+            if bfs(graph, i, j, "B", 2):
                 blue += 1
         elif graph[i][j] == "M":
-            if bfs(i, j, "M", 2):
+            if bfs(graph, i, j, "M", 2):
                 red_green += 1
 
 print(red + green + blue, red_green + blue)
