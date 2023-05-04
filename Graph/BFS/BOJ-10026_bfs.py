@@ -44,26 +44,26 @@ def bfs(graph, x, y, c, step):
                 graph[nx][ny] = VISITED[step]
                 q.append((nx, ny))
 
-    return True
+    return
 
 # (1) R과 G 영역의 개수를 세고, M으로 바꿔준다. (같은 숫자로 만들어서 하나의 영역으로)
 for i in range(n):
     for j in range(n):
         if graph[i][j] == "R":
-            if bfs(graph, i, j, "R", 1):
-                red += 1
+            bfs(graph, i, j, "R", 1)
+            red += 1
         elif graph[i][j] == "G":
-            if bfs(graph, i, j, "G", 1):
-                green += 1
+            bfs(graph, i, j, "G", 1)
+            green += 1
 
 # (2) R과 G 영역이 합쳐졌으므로, 다시 bfs를 수행한다.
 for i in range(n):
     for j in range(n):
         if graph[i][j] == "B":
-            if bfs(graph, i, j, "B", 2):
-                blue += 1
+            bfs(graph, i, j, "B", 2)
+            blue += 1
         elif graph[i][j] == "M":
-            if bfs(graph, i, j, "M", 2):
-                red_green += 1
+            bfs(graph, i, j, "M", 2)
+            red_green += 1
 
 print(red + green + blue, red_green + blue)
