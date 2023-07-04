@@ -8,4 +8,4 @@
 | BOJ | [1260 - DFS와 BFS](https://www.acmicpc.net/problem/1260) | 23.05.07 | | BFS/DFS | 
 | BOJ | [2178 - 미로 탐색](https://www.acmicpc.net/problem/2178) | 23.05.08 | | BFS |
 | LTC | [200 - Number of Islands](https://leetcode.com/problems/number-of-islands/) | 23.07.03 | | DFS |
-| LTC | [17 - Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/) | 23.07.04 | ✅ | DFS, Backtracking |
+
