@@ -1,6 +1,7 @@
 # graph
 | 플랫폼  | 문제 정보 | 날짜       | 리뷰 필요 | 키워드     |
 |------|-----|----------|-------|---------|
+| LTC | [129 - Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/) | 23.08.23 | | |
 | LTC | [130 - Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) | 23.07.19 | ✅     | DFS |
 | LTC | [200 - Number of Islands](https://leetcode.com/problems/number-of-islands/) | 23.07.03 |       | DFS |
 | BOJ | [2178 - 미로 탐색](https://www.acmicpc.net/problem/2178) | 23.05.08 |       | BFS |
