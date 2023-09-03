@@ -1,6 +1,7 @@
 # graph
 | 플랫폼  | 문제 정보 | 날짜       | 리뷰 필요 | 키워드     |
 |------|-----|----------|-------|---------|
+| LTC | [547 - Number of Provinces](https://leetcode.com/problems/number-of-provinces/) | 23.08.31 | | DFS |
 | LTC | [365 - Water and Jug Problem](https://leetcode.com/problems/water-and-jug-problem/) | 23.08.30 | ✅     | BFS |
 | LTC | [129 - Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers/) | 23.08.23 |       | DFS     |
 | LTC | [130 - Surrounded Regions](https://leetcode.com/problems/surrounded-regions/) | 23.07.19 | ✅     | DFS     |
