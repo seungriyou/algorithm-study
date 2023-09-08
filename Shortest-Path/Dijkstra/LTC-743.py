@@ -1,37 +1,66 @@
 # [LTC] 743 - Network Delay Time
+# https://leetcode.com/problems/network-delay-time/
 
 from typing import List
-from collections import defaultdict
 import heapq
 
+class Solution:
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        graph = [[] for _ in range(n + 1)]
 
-def networkDelayTime(times: List[List[int]], n: int, k: int) -> int:
-    graph = defaultdict(list)
-    # 그래프 인접 리스트 구성
-    for a, b, c in times:
-        graph[a].append((b, c))
+        for x, y, w in times:
+            graph[x].append((w, y))
 
-    # queue : [(소요 시간, 정점)]
-    queue = [(0, k)]
+        visited = set()
+        heap = [(0, k)]
 
-    dist = defaultdict(int)
+        while heap:
+            time, now = heapq.heappop(heap)
+            visited.add(now)
 
-    # 우선순위 큐 최솟값 기준으로 정점까지 최단 경로 삽입
-    while queue:
-        time, node = heapq.heappop(queue)
-        if node not in dist:
-            dist[node] = time
-            for b, c in graph[node]:
-                alt = time + c
-                heapq.heappush(queue, (alt, b))
+            if len(visited) == n:
+                return time
 
-    # 모든 노드의 최단 경로 존재 여부 판별
-    if len(dist) == n:
-        return max(dist.values())
-    return -1
+            for i in graph[now]:
+                if i[1] not in visited:
+                    heapq.heappush(heap, (i[0] + time, i[1]))
+
+        return -1
+
+    def networkDelayTime_2(self, times: List[List[int]], n: int, k: int) -> int:
+        graph = [[] for _ in range(n + 1)]
+        for u, v, w in times:
+            graph[u].append((v, w))
+        INF = int(1e9)
+        distance = [INF] * (n + 1)
+
+        def dijkstra(start):
+            q = []
+            distance[start] = 0
+            heapq.heappush(q, (0, start))
+
+            while q:
+                dist, now = heapq.heappop(q)
+                if distance[now] < dist:
+                    continue
+                for i in graph[now]:
+                    cost = dist + i[1]
+                    if cost < distance[i[0]]:
+                        distance[i[0]] = cost
+                        heapq.heappush(q, (cost, i[0]))
+
+        dijkstra(k)
+
+        time, cnt = 0, 0
+        for i in range(1, n + 1):
+            if distance[i] != INF:
+                time = max(time, distance[i])
+                cnt += 1
+        return time if cnt == n else -1
 
 
 times = [[2,1,1],[2,3,1],[3,4,1]]
 n = 4
 k = 2
-print(networkDelayTime(times, n, k))
+sol = Solution()
+print(sol.networkDelayTime(times, n, k))
