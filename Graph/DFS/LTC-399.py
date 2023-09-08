@@ -2,6 +2,7 @@
 # https://leetcode.com/problems/evaluate-division/
 
 from typing import List
+from collections import defaultdict, deque
 
 class Solution:
     def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
@@ -65,3 +66,9 @@ class Solution:
             result.append(solve(s, e, visited))
 
         return result
+
+equations = [["a","b"],["b","c"]]
+values = [2.0,3.0]
+queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
+sol = Solution()
+print(sol.calcEquation(equations, values, queries))
