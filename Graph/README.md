@@ -1,7 +1,8 @@
 # graph
 | 플랫폼  | 문제 정보 | 날짜       | 리뷰 필요 | 키워드                    |
 |------|-----|----------|-------|------------------------|
-| LTC | [207 - Course Schedule](https://leetcode.com/problems/course-schedule/) | 23.09.09 | | DFS / Topological Sort |
+| LTC | [787 - Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) | 23.09.08 | ✅ | BFS / Dijkstra |    
+| LTC | [207 - Course Schedule](https://leetcode.com/problems/course-schedule/) | 23.09.08 | | DFS / Topological Sort |
 | LTC | [332 - Reconstruct Itinerary](https://leetcode.com/problems/reconstruct-itinerary/) | 23.09.08 | | DFS                    |
 | LTC | [399 - Evaluate Division](https://leetcode.com/problems/evaluate-division/) | 23.09.04 | | BFS/DFS                |
 | LTC | [547 - Number of Provinces](https://leetcode.com/problems/number-of-provinces/) | 23.08.31 | | DFS                    |
