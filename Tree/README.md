@@ -1,6 +1,7 @@
 # tree
 | 플랫폼 | 문제 정보 | 날짜       | 리뷰 필요 | 키워드              |
 |------|-----|----------|-------|------------------|
+| LTC | [687 - Longest Univalue Path](https://leetcode.com/problems/longest-univalue-path/) | 23.09.08 | ✅ | DFS |
 | LTC | [543 - Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/) | 23.09.08 | ✅ | DFS |
 | LTC | [104 - Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/) | 23.09.08 | | BFS, DFS |
 | LTC | [199 - Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/) | 23.09.05 | ✅ | BFS, DFS |
