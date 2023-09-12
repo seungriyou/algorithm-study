@@ -1,6 +1,7 @@
 # graph
 | 플랫폼  | 문제 정보 | 날짜       | 리뷰 필요 | 키워드                    |
 |------|-----|----------|-------|------------------------|
+| LTC | [100 - Same Tree](https://leetcode.com/problems/same-tree/) | 23.09.12 | | Tree |
 | LTC | [433 - Minimum Genetic Mutation](https://leetcode.com/problems/minimum-genetic-mutation/) | 23.09.11 | | BFS |
 | LTC | [417 - Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/) | 23.09.08 | ✅ | DFS / BFS |
 | LTC | [787 - Cheapest Flights Within K Stops](https://leetcode.com/problems/cheapest-flights-within-k-stops/) | 23.09.08 | ✅ | BFS / Dijkstra |    
