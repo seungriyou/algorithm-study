@@ -1,6 +1,7 @@
 # graph
 | 플랫폼  | 문제 정보 | 날짜       | 리뷰 필요 | 키워드                    |
 |------|-----|----------|-------|------------------------|
+| LTC | [785 - Is Graph Bipartite?](https://leetcode.com/problems/is-graph-bipartite/) | 23.09.16 | ✅ | Graph Coloring (DFS / BFS) |
 | LTC | [886 - Possible Bipartition](https://leetcode.com/problems/possible-bipartition/) | 23.09.16 | ✅ | Graph Coloring (DFS / BFS) |
 | LTC | [200 - Number of Islands](https://leetcode.com/problems/number-of-islands/) | 23.09.16 |       | DFS / BFS              |
 | LTC | [100 - Same Tree](https://leetcode.com/problems/same-tree/) | 23.09.12 | | Tree                   |
