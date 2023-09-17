@@ -1,6 +1,7 @@
 # backtracking
 | 플랫폼  | 문제 정보                                                                                                              | 날짜       | 리뷰 필요 | 키워드         |
 |------|--------------------------------------------------------------------------------------------------------------------|----------|-------|-------------|
+| LTC | [51 - N-Queens](https://leetcode.com/problems/n-queens/) | 23.09.16 | ✅ | N-Queens |
 | LTC | [39 - Combination Sum](https://leetcode.com/problems/combination-sum/) | 23.09.08 | ✅ | 중복조합 |
 | LTC | [37 - Sudoku Solver](https://leetcode.com/problems/sudoku-solver/) | 23.09.05 | | Reduce Decision Space |
 | LTC | [90 - Subsets II](https://leetcode.com/problems/subsets-ii/) | 23.07.20 | ✅     | Subset |  
