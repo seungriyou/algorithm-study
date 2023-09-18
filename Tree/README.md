@@ -1,6 +1,7 @@
 # tree
 | 플랫폼 | 문제 정보 | 날짜       | 리뷰 필요 | 키워드                                    |
 |------|-----|----------|-------|----------------------------------------|
+| LTC | [513 - Find Bottom Left Tree Value](https://leetcode.com/problems/find-bottom-left-tree-value/) | 23.09.18 | | DFS / BFS |
 | LTC | [230 = Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) | 23.09.15 | ✅ | Inorder Traversal w/ Generator & Stack |
 | LTC | [449 - Serialize and Deserialize BST](https://leetcode.com/problems/serialize-and-deserialize-bst/) | 23.09.13 | ✅ | BST, Traversal                         |
 | LTC | [226 - Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/) | 23.09.08 | |                                        |
