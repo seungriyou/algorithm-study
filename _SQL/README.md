@@ -3,7 +3,7 @@
 
 <br>
 
-### 01. GROUP BY 후 조건에 부합하는 값 COUNT 하는 방법
+## 01. GROUP BY 후 조건에 부합하는 값 COUNT 하는 방법
 > https://leetcode.com/problems/queries-quality-and-percentage/
 
 **`IF()`** 나 **`CASE`-`WHEN`-`THEN`-(`ELSE`)-`END`** 절로 조건을 걸 수 있다.
@@ -24,7 +24,7 @@ GROUP BY query_name
 
 <br>
 
-### 02. 결과가 비어있을 때 NULL을 반환하는 방법
+## 02. 결과가 비어있을 때 NULL을 반환하는 방법
 > https://leetcode.com/problems/biggest-single-number/
 
 일반 SELECT를 사용하면 결과가 없는 경우는 아예 출력되지 않으므로, **중첩 SELECT 문**을 사용한다.
@@ -50,7 +50,7 @@ SELECT (
 
 <br>
 
-### 03. FROM 절에 중첩 SELECT 문 사용하는 예제
+## 03. FROM 절에 중첩 SELECT 문 사용하는 예제
 > https://leetcode.com/problems/delete-duplicate-emails/
 
 GROUP BY 후 함수를 적용한 결과를 WHERE 조건으로 사용하고 싶다면 **중첩 SELECT 문**을 작성한다.
@@ -69,7 +69,7 @@ WHERE id NOT IN (
 
 <br>
 
-### 04. WHERE 절 조건에 정규 표현식 사용하기
+## 04. WHERE 절 조건에 정규 표현식 사용하기
 > https://leetcode.com/problems/find-users-with-valid-e-mails/
 
 **`REGEXP`** 를 이용한다.
@@ -91,7 +91,7 @@ WHERE conditions REGEXP ('\\bDIAB1');
 
 <br>
 
-### 05. GROUP BY 시, 문자열 CONCAT 하기
+## 05. GROUP BY 시, 문자열 CONCAT 하기
 > https://leetcode.com/problems/group-sold-products-by-the-date/
 
 **`GROUP_CONCAT`** 함수를 이용한다.
@@ -110,7 +110,7 @@ ORDER BY sell_date, product;
 
 <br>
 
-### 06. DATE format을 다루는 방법
+## 06. DATE format을 다루는 방법
 > https://leetcode.com/problems/monthly-transactions-i/
 
 `2018-12-18` 과 같은 DATE 형식에서 **YEAR + MONTH를 추출**하고 싶을 때, 다음과 같은 방법을 선택할 수 있다.
