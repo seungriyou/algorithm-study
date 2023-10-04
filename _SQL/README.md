@@ -6,7 +6,7 @@
 ### 01. GROUP BY 후 조건에 부합하는 값 COUNT 하는 방법
 > https://leetcode.com/problems/queries-quality-and-percentage/
 
-**`IF()`**나 **`CASE`-`WHEN`-`THEN`-(`ELSE`)-`END`** 절로 조건을 걸 수 있다.
+**`IF()`** 나 **`CASE`-`WHEN`-`THEN`-(`ELSE`)-`END`** 절로 조건을 걸 수 있다.
 
 혹은 비교연산자 자체가 0, 1 값을 반환하므로 그대로 `SUM`, `AVG` 연산에 이용해도 된다.
 
@@ -72,7 +72,7 @@ WHERE id NOT IN (
 ### 04. WHERE 절 조건에 정규 표현식 사용하기
 > https://leetcode.com/problems/find-users-with-valid-e-mails/
 
-**`REGEXP`**를 이용한다.
+**`REGEXP`** 를 이용한다.
 
 ```sql
 SELECT *
