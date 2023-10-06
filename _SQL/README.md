@@ -148,6 +148,32 @@ Subjects
 
 <br>
 
+### 1.5 테이블 내의 데이터 개수 구하기
+> https://leetcode.com/problems/game-play-analysis-iv/
+
+`(SELECT COUNT(*) FROM Product)` 와 같이 `COUNT()`를 SELECT 하면 된다.
+
+`(SELECT COUNT(DISTINCT player_id) FROM Activity)` 와 같이 `DISTINCT`를 `COUNT()` 내에 사용할 수도 있다.
+
+```sql
+SELECT customer_id
+FROM Customer
+GROUP BY customer_id
+HAVING COUNT(DISTINCT product_key) = (SELECT COUNT(*) FROM Product);
+```
+
+```sql
+SELECT ROUND(COUNT(player_id) / (SELECT COUNT(DISTINCT player_id) FROM Activity), 2) AS fraction
+FROM Activity
+WHERE (player_id, event_date) IN (
+    SELECT player_id, DATE_ADD(MIN(event_date), INTERVAL 1 DAY)
+    FROM Activity
+    GROUP BY player_id
+);
+```
+
+<br>
+
 ## 2. Functions
 ### 2.1 `GROUP_CONCAT`: GROUP BY 시, 문자열 CONCAT 하기
 > https://leetcode.com/problems/group-sold-products-by-the-date/
