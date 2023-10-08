@@ -1,4 +1,4 @@
-# SQL CheatSheet 🔖
+# MySQL CheatSheet 🔖
 
 ## 1. Tips
 ### 1.1 GROUP BY 후 조건에 부합하는 값 COUNT 하는 방법
@@ -44,6 +44,19 @@ SELECT (
     HAVING COUNT(*) = 1
     ORDER BY num DESC LIMIT 1
 ) AS num;
+```
+
+> https://leetcode.com/problems/second-highest-salary/
+
+이렇게 `SELECT` 절 안에 subquery를 넣게 되면, **결과 값이 없는 경우에도 빈 테이블이 아닌 `NULL`을 반환**한다.
+
+```sql
+SELECT (
+    SELECT DISTINCT salary
+    FROM Employee
+    ORDER BY salary DESC
+    LIMIT 1, 1
+) AS SecondHighestSalary;
 ```
 
 <br>
@@ -174,6 +187,42 @@ WHERE (player_id, event_date) IN (
 
 <br>
 
+### 1.5 조건에 맞는 값 COUNT 하는 방법 (`SUM(condition)`)
+> https://leetcode.com/problems/count-salary-categories/
+
+어떤 조건에 부합하는 값의 개수를 세려면, 다음의 두 방법을 사용할 수 있다.
+
+1. **`WHERE` 절에 조건**을 달고, **`SELECT` 절에서 `COUNT(*)` 함수**를 사용한다.
+    
+    ```sql
+    SELECT 'Low Salary' AS category, COUNT(*) AS accounts_count
+    FROM Accounts
+    WHERE income < 20000
+    UNION
+    SELECT 'Average Salary' AS category, COUNT(*) AS accounts_count
+    FROM Accounts
+    WHERE income BETWEEN 20000 AND 50000
+    UNION
+    SELECT 'High Salary' AS category, COUNT(*) AS accounts_count
+    FROM Accounts
+    WHERE income > 50000;
+    ```
+    
+2. **`SELECT` 절**에서 **`SUM(condition)` 함수**를 사용하여, condition을 만족하는 값의 개수를 센다.
+    
+    ```sql
+    SELECT 'Low Salary' AS category, SUM(income < 20000) AS accounts_count
+    FROM Accounts
+    UNION
+    SELECT 'Average Salary' AS category, SUM(income BETWEEN 20000 AND 50000) AS accounts_count
+    FROM Accounts
+    UNION
+    SELECT 'High Salary' AS category, SUM(income > 50000) AS accounts_count
+    FROM Accounts;
+    ```
+
+<br>
+
 ## 2. Functions
 ### 2.1 `GROUP_CONCAT`: GROUP BY 시, 문자열 CONCAT 하기
 > https://leetcode.com/problems/group-sold-products-by-the-date/
@@ -194,7 +243,7 @@ ORDER BY sell_date, product;
 
 <br>
 
-### 2.2 `DATE_FORMAT`: DATE format을 다루는 방법
+### 2.2 `DATE_FORMAT`: DATE Format을 다루는 방법
 > https://leetcode.com/problems/monthly-transactions-i/
 
 `2018-12-18` 과 같은 DATE 형식에서 **YEAR + MONTH를 추출**하고 싶을 때, 다음과 같은 방법을 선택할 수 있다.
@@ -224,6 +273,42 @@ FROM Transactions
 GROUP BY country, month
 ```
 
+| Specifier | Description                                                                                        |
+| --- |----------------------------------------------------------------------------------------------------|
+| `%a` | Abbreviated weekday name (`Sun`..`Sat`)                                                            |
+| `%b` | Abbreviated month name (`Jan`..`Dec`)                                                              |
+| `%c` | Month, numeric (`0`..`12`)                                                                         |
+| `%D` | Day of the month with English suffix (`0th`, `1st`, `2nd`, `3rd`, …)                               |
+| `%d` | Day of the month, numeric (`00`..`31`)                                                             |
+| `%e` | Day of the month, numeric (`0`..`31`)                                                              |
+| `%f` | Microseconds (`000000`..`999999`)                                                                  |
+| `%H` | Hour (`00`..`23`)                                                                                  |
+| `%h` | Hour (`01`..`12`)                                                                                  |
+| `%I` | Hour (`01`..`12`)                                                                                  |
+| `%i` | Minutes, numeric (`00`..`59`)                                                                      |
+| `%j` | Day of year (`001`..`366`)                                                                         |
+| `%k` | Hour (`0`..`23`)                                                                                   |
+| `%l` | Hour (`1`..`12`)                                                                                   |
+| `%M` | Month name (`January`..`December`)                                                                 |
+| `%m` | Month, numeric (`00`..`12`)                                                                        |
+| `%p` | `AM` or `PM`                                                                                       |
+| `%r` | Time, 12-hour (`hh:mm:ss` followed by `AM` or `PM`)                                                |
+| `%S` | Seconds (`00`..`59`)                                                                               |
+| `%s` | Seconds (`00`..`59`)                                                                               |
+| `%T` | Time, 24-hour (`hh:mm:ss`)                                                                         |
+| `%U` | Week (`00`..`53`), where Sunday is the first day of the week; `WEEK()` mode 0                      |
+| `%u` | Week (`00`..`53`), where Monday is the first day of the week; `WEEK()` mode 1                      |
+| `%V` | Week (`01`..`53`), where Sunday is the first day of the week; `WEEK()` mode 2; used with `%X`      |
+| `%v` | Week (`01`..`53`), where Monday is the first day of the week; `WEEK()` mode 3; used with `%x`      |
+| `%W` | Weekday name (`Sunday`..`Saturday`)                                                                |
+| `%w` | Day of the week (`0`=Sunday..`6`=Saturday)                                                         |
+| `%X` | Year for the week where Sunday is the first day of the week, numeric, four digits; used with `%V`  |
+| `%x` | Year for the week, where Monday is the first day of the week, numeric, four digits; used with `%v` |
+| `%Y` | Year, numeric, four digits                                                                         |
+| `%y` | Year, numeric (two digits)                                                                         |
+| `%%` | A literal `%` character                                                                            |
+| `%x` | `x`, for any “`x`” not listed above                                                                  |
+
 <br>
 
 ### 2.3 `COALESCE`: NULL이 아닌 첫 번째 파라미터 반환 (`IFNULL`과 비교)
@@ -249,19 +334,19 @@ SELECT COALESCE(NULL, NULL, NULL, 'hi~', NULL, 'bye');
 
 ```sql
 SELECT 
-	S.student_id
-	, S.student_name
-	, Sub.subject_name
-	, IFNULL(E.cnt, 0) AS attended_exams
+    S.student_id
+    , S.student_name
+    , Sub.subject_name
+    , IFNULL(E.cnt, 0) AS attended_exams
 ...
 ```
 
 ```sql
 SELECT
-	S.student_id
-	, S.student_name
-	, Sub.subject_name
-	, COALESCE(E.cnt, 0) AS attended_exams
+    S.student_id
+    , S.student_name
+    , Sub.subject_name
+    , COALESCE(E.cnt, 0) AS attended_exams
 ...
 ```
 
@@ -291,25 +376,25 @@ WHERE columnN (NOT) LIKE pattern;
 #### [2] `RLIKE` / `REGEXP`: 복잡한 패턴 검색 (w/ 정규표현식)
 > https://www.geeksforgeeks.org/rlike-operator-in-mysql/
 
-| Pattern     | What the Pattern matches                                                                                                                                                         |
-|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `*`         | Zero or more instances of string preceding it                                                                                                                                    |
-| `+`         | One or more instances of strings preceding it                                                                                                                                    |
-| `.`         | Any single character                                                                                                                                                             |
-| `?`         | Match zero or one instances of the strings preceding it                                                                                                                          |
-| `^` (caret) | Beginning of string                                                                                                                                                              |
-| `$`         | End of string                                                                                                                                                                    |
-| `[abc]`     | Any character listed between the square brackets                                                                                                                                 |
-| `[^abc]`    | Any character not listed between the square brackets                                                                                                                             |
-| `[A-Z]`     | match any upper case letter                                                                                                                                                      |
-| `[a-z]`     | match any lower case letter                                                                                                                                                      |
-| `[0-9]`     | match any digit from 0 through to 9                                                                                                                                              |
-| `[[:<:]]`   | matches the beginning of words                                                                                                                                                   |
-| `[[:>:]]`   | matches the end of words                                                                                                                                                         |
+| Pattern     | What the Pattern Matches                                                                                                                                                          |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `*`         | Zero or more instances of string preceding it                                                                                                                                     |
+| `+`         | One or more instances of strings preceding it                                                                                                                                     |
+| `.`         | Any single character                                                                                                                                                              |
+| `?`         | Match zero or one instances of the strings preceding it                                                                                                                           |
+| `^` (caret) | Beginning of string                                                                                                                                                               |
+| `$`         | End of string                                                                                                                                                                     |
+| `[abc]`     | Any character listed between the square brackets                                                                                                                                  |
+| `[^abc]`    | Any character not listed between the square brackets                                                                                                                              |
+| `[A-Z]`     | match any upper case letter                                                                                                                                                       |
+| `[a-z]`     | match any lower case letter                                                                                                                                                       |
+| `[0-9]`     | match any digit from 0 through to 9                                                                                                                                               |
+| `[[:<:]]`   | matches the beginning of words                                                                                                                                                    |
+| `[[:>:]]`   | matches the end of words                                                                                                                                                          |
 | `[:class:]` | matches a character class<br>- `[:alpha:]` to match letters<br>- `[:space:]` to match white space<br>- `[:punct:]` is match punctuations<br>- `[:upper:]` for upper class letters |
-| `p1ㅣp2ㅣp3`  | Alternation; matches any of the patterns p1, p2, or p3 |
-| `{n}`       | n instances of preceding element                                                                                                                                                 |
-| `{m,n}`     | m through n instances of preceding element                                                                                                                                       |
+| `p1ㅣp2ㅣp3`  | Alternation; matches any of the patterns p1, p2, or p3                                                                                                                            |
+| `{n}`       | n instances of preceding element                                                                                                                                                  |
+| `{m,n}`     | m through n instances of preceding element                                                                                                                                        |
 
 
 #### [3] 정규표현식 관련 함수
@@ -346,4 +431,38 @@ SELECT name FROM cities WHERE name RLIKE '^A|^B|^R';
 SELECT name FROM cities WHERE name REGEXP '^A|^B|^R';
 -- or using LIKE
 SELECT name FROM cities WHERE name LIKE 'A%' OR name LIKE 'B%' OR name LIKE 'R%'
+```
+
+<br>
+
+### 2.5 `LIMIT`과 `OFFSET`
+> https://leetcode.com/problems/second-highest-salary/
+
+그냥 **`LIMIT A`** 를 사용하면 **처음부터 `A` 개의 row를 출력**한다.
+
+```sql
+SELECT * FROM 테이블이름 LIMIT 10; # 처음부터 10개 row 출력하기 (1 ~ 10)
+```
+
+하지만, **`LIMIT A, B`** 는 **`A` 번째 row에서부터 그 이후 `B` 개의 row를 출력**한다는 뜻이다. 
+
+즉, **`A + 1` 번째 row**부터 **`A + B` 번째 row**까지 출력한다.
+
+```sql
+SELECT * FROM 테이블이름 LIMIT 20, 10; # 20번째 row부터 그 이후 10개 row 출력하기 (21 ~ 30)
+```
+
+동일한 동작을 **`LIMIT B OFFSET A`** 로 쓸 수도 있다.
+
+```sql
+SELECT * FROM 테이블이름 LIMIT 10 OFFSET 20;
+```
+
+```sql
+SELECT (
+    SELECT DISTINCT salary
+    FROM Employee
+    ORDER BY salary DESC
+    LIMIT 1, 1 # -- 1번째 row부터 그 이후 1개 row == 2번째 row
+) AS SecondHighestSalary;
 ```
