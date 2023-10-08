@@ -466,3 +466,35 @@ SELECT (
     LIMIT 1, 1 # -- 1번째 row부터 그 이후 1개 row == 2번째 row
 ) AS SecondHighestSalary;
 ```
+
+<br>
+
+### 2.6 `SUM() OVER()`
+> https://leetcode.com/problems/last-person-to-fit-in-the-bus/
+
+특정 column의 누적합을 구해야 할 때 `SUM() OVER()`를 사용할 수 있다.
+
+`turn` column 오름차순 정렬 후 위에서부터 차례로 누적합을 구한다.
+
+```sql
+SELECT person_name
+FROM (
+    SELECT person_name, SUM(weight) OVER (ORDER BY turn) AS sum
+    FROM Queue
+    ORDER BY sum DESC
+) AS Q
+WHERE sum <= 1000
+LIMIT 1;
+```
+
+JOIN을 사용하면 다음과 같이 풀 수도 있다.
+
+```sql
+SELECT Q1.person_name
+FROM Queue Q1, Queue Q2
+WHERE Q1.turn >= Q2.turn
+GROUP BY Q1.turn
+HAVING SUM(Q2.weight) <= 1000
+ORDER BY SUM(Q2.weight) DESC
+LIMIT 1;
+```
