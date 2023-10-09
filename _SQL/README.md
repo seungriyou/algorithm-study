@@ -187,7 +187,7 @@ WHERE (player_id, event_date) IN (
 
 <br>
 
-### 1.5 조건에 맞는 값 COUNT 하는 방법 (`SUM(condition)`)
+### 1.6 조건에 맞는 값 COUNT 하는 방법 (`SUM(condition)`)
 > https://leetcode.com/problems/count-salary-categories/
 
 어떤 조건에 부합하는 값의 개수를 세려면, 다음의 두 방법을 사용할 수 있다.
@@ -220,6 +220,27 @@ WHERE (player_id, event_date) IN (
     SELECT 'High Salary' AS category, SUM(income > 50000) AS accounts_count
     FROM Accounts;
     ```
+
+<br>
+
+### 1.7 특정 attribute 값이 최소/최대인 row 반환하기
+> https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/
+
+해당 attribute를 기준으로 `ORDER BY` 후, `LIMIT 1`을 걸어준다.
+
+```sql
+SELECT id, COUNT(*) AS num
+FROM (
+    SELECT requester_id AS id
+    FROM RequestAccepted
+    UNION ALL
+    SELECT accepter_id AS id
+    FROM RequestAccepted
+) AS R
+GROUP BY id
+ORDER BY num DESC
+LIMIT 1;
+```
 
 <br>
 
@@ -497,4 +518,42 @@ GROUP BY Q1.turn
 HAVING SUM(Q2.weight) <= 1000
 ORDER BY SUM(Q2.weight) DESC
 LIMIT 1;
+```
+
+<br>
+
+### 2.7 `PARTITION BY` vs. `GROUP BY`
+> https://leetcode.com/problems/investments-in-2016/
+
+> [!IMPORTANT]  
+> 추후 추가로 더 정리해야 함!
+
+다음의 두 코드는 같다.
+
+```sql
+SELECT ROUND(SUM(tiv_2016), 2) AS tiv_2016
+FROM Insurance
+WHERE tiv_2015 IN (
+    SELECT tiv_2015
+    FROM Insurance
+    GROUP BY tiv_2015
+    HAVING COUNT(*) > 1
+) AND (lat, lon) IN (
+    SELECT lat, lon
+    FROM Insurance
+    GROUP BY lat, lon
+    HAVING COUNT(*) = 1
+);
+```
+
+```sql
+SELECT ROUND(SUM(tiv_2016), 2) AS tiv_2016
+FROM (
+    SELECT 
+        tiv_2016
+        , COUNT(*) OVER(PARTITION BY tiv_2015) AS cnt1
+        , COUNT(*) OVER(PARTITION BY lat, lon) AS cnt2
+    FROM Insurance
+) AS T
+WHERE cnt1 > 1 AND cnt2 = 1;
 ```
