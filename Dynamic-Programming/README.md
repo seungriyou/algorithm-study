@@ -1,6 +1,7 @@
 # dynamic-programming
 | 플랫폼  | 문제 정보                                                            | 날짜       | 리뷰 필요 | 키워드         |
 |------|------------------------------------------------------------------|----------|-------|-------------|
+| LC | [221 - Maximal Square](https://leetcode.com/problems/maximal-square/) | 23.10.08 | ✅ | 2D -> 1D |
 | LC | [213 - House Robber II](https://leetcode.com/problems/house-robber-ii/) | 23.09.21 | | O(1) Space** |
 | LC | [44 - Wildcard Matching](https://leetcode.com/problems/wildcard-matching/) | 23.09.20 | ✅ | 2D -> 1D** |
 | LC | [198 - House Robber](https://leetcode.com/problems/house-robber/) | 23.09.16 | | O(1) Space** |
