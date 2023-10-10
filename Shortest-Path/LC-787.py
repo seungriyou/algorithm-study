@@ -8,7 +8,7 @@ class Solution:
     def findCheapestPrice_BF2d(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
         # === 2D DP (Bellman Ford) ===
         # Bellman Ford는 사실 2D DP의 space optimized version이다.
-        # 여기에선 1D version을 사용하면 한된다.
+        # 여기에선 1D version을 사용하면 안 된다.
 
         INF = int(1e5)
         # -- dp[i][j] = i 개의 edge를 확인했을 때, src로부터 j까지의 shortest distance
