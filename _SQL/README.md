@@ -1,4 +1,5 @@
 # MySQL CheatSheet 🔖
+> LeetCode, Programmers SQL 문제 풀이 중 새롭게 알게된 것들
 
 ## 1. Tips
 ### 1.1 GROUP BY 후 조건에 부합하는 값 COUNT 하는 방법
@@ -240,6 +241,29 @@ FROM (
 GROUP BY id
 ORDER BY num DESC
 LIMIT 1;
+```
+
+<br>
+
+### 1.8 `WITH` 절: 가상테이블 만들기
+> https://leetcode.com/problems/restaurant-growth/
+
+`WITH` 절로 가상테이블을 생성하면 동일한 서브쿼리를 반복해서 쓰지 않을 수 있다.
+
+```sql
+WITH C AS (
+    SELECT visited_on, SUM(amount) AS day_amount 
+    FROM Customer 
+    GROUP BY visited_on
+)
+
+SELECT C1.visited_on, SUM(C2.day_amount) AS amount, ROUND(SUM(C2.day_amount) / 7, 2) AS average_amount
+FROM C C1, C C2
+WHERE 
+    C1.visited_on >= DATE_ADD((SELECT MIN(visited_on) FROM Customer), INTERVAL 6 DAY)
+    AND DATEDIFF(C1.visited_on, C2.visited_on) BETWEEN 0 AND 6 
+GROUP BY C1.visited_on
+ORDER BY C1.visited_on;
 ```
 
 <br>
@@ -556,4 +580,60 @@ FROM (
     FROM Insurance
 ) AS T
 WHERE cnt1 > 1 AND cnt2 = 1;
+```
+
+<br>
+
+### 2.8 순위 매기기: `RANK()`, `DENSE_RANK()`, `ROW_NUMBER()`
+#### 각 함수의 동작 비교
+> https://leetcode.com/problems/rank-scores/
+
+각 함수의 동작을 실제 예제로 살펴보자.
+
+```sql
+SELECT *,
+  RANK() OVER (ORDER BY score DESC) AS _rank,
+  DENSE_RANK() OVER (ORDER BY score DESC) AS _dense_rank,
+  ROW_NUMBER() OVER (ORDER BY score DESC) AS _row_number
+FROM Scores;
+```
+
+```sql
+| id | score | _rank | _dense_rank | _row_number |
+| -- | ----- | ----- | ----------- | ----------- |
+| 3  | 4     | 1     | 1           | 1           |
+| 5  | 4     | 1     | 1           | 2           |
+| 4  | 3.85  | 3     | 2           | 3           |
+| 2  | 3.65  | 4     | 3           | 4           |
+| 6  | 3.65  | 4     | 3           | 5           |
+| 1  | 3.5   | 6     | 4           | 6           |
+```
+
+#### SELF JOIN으로 구현해보기
+> https://leetcode.com/problems/department-top-three-salaries/
+
+`DENSE_RANK()` 동작을 **SELF JOIN을 사용한 서브쿼리**로 구현할 수도 있다.
+
+다음의 두 코드는 동일한 동작을 수행한다.
+
+```sql
+# -- DENSE_RANK()를 WHERE 조건으로 보고싶다면, SELECT 절에서 아예 CASE 문으로 처리
+SELECT D.name AS Department, E.name AS Employee, E.salary AS Salary
+FROM (
+    SELECT *, DENSE_RANK() OVER (PARTITION BY departmentId ORDER BY salary DESC) AS _rank
+    FROM Employee
+) AS E
+INNER JOIN Department D ON E.departmentId = D.id
+WHERE E._rank <= 3;
+```
+
+```sql
+SELECT D.name AS Department, E1.name AS Employee, E1.salary AS Salary
+FROM Employee E1
+INNER JOIN Department D ON E1.departmentId = D.id
+WHERE (
+    SELECT COUNT(DISTINCT E2.salary)
+    FROM Employee E2
+    WHERE E2.salary > E1.salary AND E2.departmentId = E1.departmentId
+) < 3;  # -- 같은 department에서 자신의 salary 보다 높은 salary가 0~2개 존재해야 top3 임!
 ```
