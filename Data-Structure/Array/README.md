@@ -1,6 +1,8 @@
 # array
 | 플랫폼  | 문제 정보                                                                                                                                                      | 날짜       | 리뷰 필요 | 키워드                 |
 |------|------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|-------|---------------------|
+| LC | [229 - Majority Element II](https://leetcode.com/problems/majority-element-ii/) | 23.10.10 | ✅ | Boyer-Moore |
+| LC | [169 - Majority Element](https://leetcode.com/problems/majority-element/) | 23.10.10 | ✅ | Boyer-Moore / Divide-Conquer / Bit |
 | PG | [42746 - 가장 큰 수](https://school.programmers.co.kr/learn/courses/30/lessons/42746) | 23.10.05 | ✅ | Custom Sorting |
 | PG | [42842 - 카펫](https://school.programmers.co.kr/learn/courses/30/lessons/42842) | 23.10.05 | ✅     | Brute-Force         |
 | PG | [42747 - H-Index](https://school.programmers.co.kr/learn/courses/30/lessons/42747) | 23.10.05 | ✅     | Sorting             |
