@@ -1,6 +1,7 @@
 # tree
 | 플랫폼 | 문제 정보                                                                                                                                 | 날짜       | 리뷰 필요 | 키워드                                    |
 |------|---------------------------------------------------------------------------------------------------------------------------------------|----------|-------|----------------------------------------|
+| LC | [662 - Maximum Width of Binary Tree](https://leetcode.com/problems/maximum-width-of-binary-tree/) | 23.10.11 | BFS |
 | LC | [623 - Add One Row to Tree](https://leetcode.com/problems/add-one-row-to-tree/)                                                       | 23.09.22 | ✅ | BFS / DFS |
 | LC | [235 - Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/) | 23.09.19 | ✅ | Iterative / Recursive |
 | LC | [513 - Find Bottom Left Tree Value](https://leetcode.com/problems/find-bottom-left-tree-value/)                                       | 23.09.18 | | DFS / BFS |
