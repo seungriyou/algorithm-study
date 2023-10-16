@@ -1,6 +1,7 @@
 # backtracking
 | 플랫폼 | 문제 정보                                                                                                              | 날짜       | 리뷰 필요 | 키워드                   |
 |-----|--------------------------------------------------------------------------------------------------------------------|----------|-------|-----------------------|
+| PG | [87946 - 피로도](https://school.programmers.co.kr/learn/courses/30/lessons/87946) | 23.10.16 | ✅     | DFS / Brute-Force          |
 | LC | [473 - Matchsticks to Square](https://leetcode.com/problems/matchsticks-to-square/) | 23.10.13 | ✅ | Empty Bucket / Memoization / DP(?) |
 | LC | [698 - Partition to K Equal Sum Subsets](https://leetcode.com/problems/partition-to-k-equal-sum-subsets/) | 23.10.13 | ✅ | Empty Bucket / DP(?)  |
 | LC | [51 - N-Queens](https://leetcode.com/problems/n-queens/) | 23.09.16 | ✅ | N-Queens              |
