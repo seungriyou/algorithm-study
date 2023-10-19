@@ -1,6 +1,9 @@
 # graph
 | 플랫폼 | 문제 정보                                                                                                   | 날짜       | 리뷰 필요 | 키워드                        |
 |-----|---------------------------------------------------------------------------------------------------------|----------|-------|----------------------------|
+| PG | [43164 - 여행경로](https://school.programmers.co.kr/learn/courses/30/lessons/43164) | 23.10.19 | ✅ | DFS |
+| PG | [43163 - 단어 변환](https://school.programmers.co.kr/learn/courses/30/lessons/43163) | 23.10.19 | ✅ | BFS |
+| PG | [49189 - 가장 먼 노드](https://school.programmers.co.kr/learn/courses/30/lessons/49189) | 23.10.18 | | BFS / Shortest Path |
 | PG | [1844 - 게임 맵 최단거리](https://school.programmers.co.kr/learn/courses/30/lessons/1844) | 23.10.16 |       | BFS (Shortest Path)        |
 | PG | [43162 - 네트워크](https://school.programmers.co.kr/learn/courses/30/lessons/43162)                         | 23.10.13 |       | DFS / BFS                  |
 | PG | [43165 - 타겟넘버](https://school.programmers.co.kr/learn/courses/30/lessons/43165)                         | 23.10.10 |       | DFS / BFS / itertools      |
