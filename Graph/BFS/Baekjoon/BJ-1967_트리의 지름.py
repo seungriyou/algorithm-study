@@ -29,17 +29,17 @@ def bfs(start):
     # max_di: 가장 먼 노드의 번호
 
     while q:
-        npos, d = q.popleft()
+        pos, d = q.popleft()
 
-        for nn, nd in graph[npos]:
-            if distance[nn] == -1:
-                dist = distance[npos] + nd
-                distance[nn] = dist
-                q.append((nn, dist))
+        for npos, nd in graph[pos]:
+            if distance[npos] == -1:
+                dist = distance[pos] + nd
+                distance[npos] = dist
+                q.append((npos, dist))
                 # 가장 먼 노드까지의 거리 & 번호 트래킹
                 if dist > max_d:
                     max_d = dist
-                    max_di = nn
+                    max_di = npos
 
     return max_d, max_di
 
