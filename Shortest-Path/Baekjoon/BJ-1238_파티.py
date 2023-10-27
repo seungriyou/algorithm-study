@@ -4,7 +4,7 @@ import sys
 import heapq
 from typing import List, Tuple, Optional
 
-sys.stdin = open('input.txt')
+sys.stdin = open('../input.txt')
 input = sys.stdin.readline
 
 
