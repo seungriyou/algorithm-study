@@ -1,19 +1,20 @@
-# [BJ] 15649 - N과 M (1)
-# https://www.acmicpc.net/problem/15649
+# https://www.acmicpc.net/problem/15654
 
 import sys
 input = sys.stdin.readline
 
-n, m = map(int, input().split())
+N, M = map(int, input().split())
+nums = list(map(int, input().split()))
+nums.sort()
 
-nums = list(range(1, n + 1))
+# result = []
 prev_elements = []
 
 def backtrack(elements):
     # base condition
-    if len(prev_elements) == m:
+    if len(prev_elements) == M:
         print(" ".join(map(str, prev_elements)))
-        return
+        # result.append(prev_elements[:])
 
     # recur
     for e in elements:
@@ -25,3 +26,4 @@ def backtrack(elements):
         prev_elements.pop()
 
 backtrack(nums)
+# print(result)
