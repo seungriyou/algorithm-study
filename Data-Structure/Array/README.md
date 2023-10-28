@@ -1,6 +1,7 @@
 # array
 | 플랫폼  | 문제 정보                                                                                                                                                      | 날짜       | 리뷰 필요 | 키워드                                |
 |------|------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|-------|------------------------------------|
+| LC | [844 - Backspace String Compare](https://leetcode.com/problems/backspace-string-compare/) | 23.10.22 | | Stack |
 | PG | [42583 - 다리를 지나는 트럭](https://school.programmers.co.kr/learn/courses/30/lessons/42583) | 23.10.22 | ✅ | Deque                              |
 | LC | [229 - Majority Element II](https://leetcode.com/problems/majority-element-ii/) | 23.10.10 | ✅ | Boyer-Moore                        |
 | LC | [169 - Majority Element](https://leetcode.com/problems/majority-element/) | 23.10.10 | ✅ | Boyer-Moore / Divide-Conquer / Bit |
