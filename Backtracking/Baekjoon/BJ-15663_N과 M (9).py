@@ -1,13 +1,12 @@
-# [BJ] 15649 - N과 M (1)
-# https://www.acmicpc.net/problem/15649
-
+# https://www.acmicpc.net/problem/15663
 import sys
 input = sys.stdin.readline
 
 # ===== w/ seen =====
 N, M = map(int, input().split())
+nums = list(map(int, input().split()))
+nums.sort()
 
-nums = list(range(1, N + 1))
 prev_elements = []
 seen = [False] * N
 
@@ -18,9 +17,11 @@ def backtrack():
         return
 
     # recur
+    prev = 0        # 같은 level에서 직전에 본 숫자 기록
     for i in range(N):
-        if not seen[i]:
+        if not seen[i] and prev != nums[i]:
             prev_elements.append(nums[i])
+            prev = nums[i]
             seen[i] = True
 
             backtrack()
@@ -33,8 +34,9 @@ backtrack()
 
 # ===== w/o seen =====
 N, M = map(int, input().split())
+nums = list(map(int, input().split()))
+nums.sort()
 
-nums = list(range(1, N + 1))
 prev_elements = []
 
 def backtrack(elements):
@@ -44,14 +46,16 @@ def backtrack(elements):
         return
 
     # recur
-    for e in elements:
-        next_elements = elements[:]
-        next_elements.remove(e)
+    prev = 0
+    for i in range(len(elements)):
+        if prev != elements[i]:
+            next_elements = elements[:]
+            next_elements.pop(i)
 
-        prev_elements.append(e)
-        backtrack(next_elements)
-        prev_elements.pop()
+            prev_elements.append(elements[i])
+            prev = elements[i]
+            backtrack(next_elements)
+            prev_elements.pop()
+
 
 backtrack(nums)
-
-

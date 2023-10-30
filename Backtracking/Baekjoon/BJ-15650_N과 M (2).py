@@ -12,7 +12,7 @@ prev_elements = []
 def backtrack(idx):
     # base case
     if len(prev_elements) == m:
-        print(' '.join(map(str, prev_elements)))
+        print(*prev_elements)
         return
 
     for i in range(idx, n):

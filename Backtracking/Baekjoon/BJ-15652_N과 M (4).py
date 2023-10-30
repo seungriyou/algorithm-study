@@ -12,9 +12,10 @@ prev_elements = []
 def backtrack(idx):
     # base condition
     if len(prev_elements) == m:
-        print(' '.join(map(str, prev_elements)))
+        print(*prev_elements)
         return
 
+    # recur
     for i in range(idx, n):
         prev_elements.append(elements[i])
         backtrack(i)

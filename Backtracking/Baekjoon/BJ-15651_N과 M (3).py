@@ -10,11 +10,12 @@ elements = list(range(1, n + 1))
 prev_elements = []
 
 def backtrack():
-    # base case
+    # base condition
     if len(prev_elements) == m:
-        print(' '.join(map(str, prev_elements)))
+        print(*prev_elements)
         return
 
+    # recur
     for i in range(n):
         prev_elements.append(elements[i])
         backtrack()
