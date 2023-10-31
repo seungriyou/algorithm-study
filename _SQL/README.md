@@ -268,6 +268,35 @@ ORDER BY C1.visited_on;
 
 <br>
 
+### 1.9 어떤 문자열의 앞부분에 위치한 숫자 추출하기
+> https://school.programmers.co.kr/learn/courses/30/lessons/151141
+
+`30일 이상`이라는 문자열에서 **`30`이라는 숫자를 추출**하려면, 다음과 같이 **`CAST()`나 `CONVERT()`를 이용하여 데이터 타입 변환을 수행**하면 된다.
+
+```sql
+SELECT CAST('30일 이상' AS UNSIGNED); # 30
+```
+
+```sql
+SELECT CONVERT('30일 이상', UNSIGNED); # 30
+```
+
+이러한 경우, `UNSIGNED`가 아닌 `일 이상`은 삭제된다.
+
+하지만, 이러한 함수들은 **앞에서부터 순차적으로 데이터 타입 변환을 수행하다가 변환이 불가능한 경우 중단**되므로, 다음과 같은 경우에 대해서는 주의하자.
+
+```sql
+SELECT CAST('~ 30일 이상' AS UNSIGNED); # 0
+SELECT CONVERT('~ 30일 이상', UNSIGNED); # 0
+```
+
+```sql
+SELECT CAST('30일123 이상' AS UNSIGNED); # 30
+SELECT CONVERT('30일123 이상', UNSIGNED); # 30
+```
+
+<br>
+
 ## 2. Functions
 ### 2.1 `GROUP_CONCAT`: GROUP BY 시, 문자열 CONCAT 하기
 > https://leetcode.com/problems/group-sold-products-by-the-date/
@@ -637,3 +666,55 @@ WHERE (
     WHERE E2.salary > E1.salary AND E2.departmentId = E1.departmentId
 ) < 3;  # -- 같은 department에서 자신의 salary 보다 높은 salary가 0~2개 존재해야 top3 임!
 ```
+
+<br>
+
+### 2.9 `CAST`, `CONVERT`: 데이터 타입 변환하기
+> - https://school.programmers.co.kr/learn/courses/30/lessons/151141
+> - https://www.w3schools.com/mysql/func_mysql_cast.asp
+> - https://www.w3schools.com/mysql/func_mysql_convert.asp
+
+#### `CAST()` 함수
+
+```sql
+CAST(value AS datatype)
+```
+
+`datatype`으로 사용할 수 있는 값은 다음과 같다.
+
+| Value |	Description |
+| --- | --- |
+| `DATE` | 	Converts value to DATE. Format: "YYYY-MM-DD" |
+| `DATETIME` | 	Converts value to DATETIME. Format: "YYYY-MM-DD HH:MM:SS" |
+| `DECIMAL` | 	Converts value to DECIMAL. Use the optional M and D parameters to specify the maximum number of digits (M) and the number of digits following the decimal point (D). |
+| `TIME` | 	Converts value to TIME. Format: "HH:MM:SS" |
+| `CHAR` | 	Converts value to CHAR (a fixed length string) |
+| `NCHAR` | 	Converts value to NCHAR (like CHAR, but produces a string with the national character set) |
+| `SIGNED` | 	Converts value to SIGNED (a signed 64-bit integer) |
+| `UNSIGNED` | 	Converts value to UNSIGNED (an unsigned 64-bit integer) |
+| `BINARY` | 	Converts value to BINARY (a binary string) |
+
+
+#### `CONVERT()` 함수
+
+```sql
+CONVERT(value, type)
+
+CONVERT(value USING charset)
+```
+
+`datatype`으로 사용할 수 있는 값은 다음과 같다. (`CAST()`와 동일)
+
+| Value |	Description |
+| --- | --- |
+| `DATE` | 	Converts value to DATE. Format: "YYYY-MM-DD" |
+| `DATETIME` | 	Converts value to DATETIME. Format: "YYYY-MM-DD HH:MM:SS" |
+| `DECIMAL` | 	Converts value to DECIMAL. Use the optional M and D parameters to specify the maximum number of digits (M) and the number of digits following the decimal point (D). |
+| `TIME` | 	Converts value to TIME. Format: "HH:MM:SS" |
+| `CHAR` | 	Converts value to CHAR (a fixed length string) |
+| `NCHAR` | 	Converts value to NCHAR (like CHAR, but produces a string with the national character set) |
+| `SIGNED` | 	Converts value to SIGNED (a signed 64-bit integer) |
+| `UNSIGNED` | 	Converts value to UNSIGNED (an unsigned 64-bit integer) |
+| `BINARY` | 	Converts value to BINARY (a binary string) |
+
+`charset`은 변환하고 싶은 character set(ex. `latin1`)을 명시하면 된다.
