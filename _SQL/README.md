@@ -669,7 +669,7 @@ WHERE (
 
 <br>
 
-### 2.9 `CAST`, `CONVERT`: 데이터 타입 변환하기
+### 2.9 `CAST()`, `CONVERT()`: 데이터 타입 변환하기
 > - https://school.programmers.co.kr/learn/courses/30/lessons/151141
 > - https://www.w3schools.com/mysql/func_mysql_cast.asp
 > - https://www.w3schools.com/mysql/func_mysql_convert.asp
@@ -718,3 +718,81 @@ CONVERT(value USING charset)
 | `BINARY` | 	Converts value to BINARY (a binary string) |
 
 `charset`은 변환하고 싶은 character set(ex. `latin1`)을 명시하면 된다.
+
+<br>
+
+### 2.10 `CONCAT()`, `CONCAT_WS()`: 문자열 이어붙이기
+> - https://www.w3schools.com/mysql/func_mysql_concat.asp
+> - https://www.w3schools.com/mysql/func_mysql_concat_ws.asp
+
+#### `CONCAT()` 함수
+
+단순히 인자들을 이어붙인다.
+
+```sql
+SELECT CustomerName, CONCAT(Address, " ", PostalCode, " ", City) AS Address
+FROM Customers;
+```
+
+#### `CONCAT_WS()` 함수
+
+첫 번째 인자로 `separator`를 지정할 수 있다.
+
+```sql
+SELECT CustomerName, CONCAT_WS(" ", Address, PostalCode, City) AS Address
+FROM Customers;
+```
+
+<br>
+
+### 2.11 `SUBSTRING()`, `LEFT()`, `RIGHT()`: 부분 문자열 추출하기
+> https://www.w3schools.com/mysql/func_mysql_substring.asp
+
+#### `SUBSTRING()` 함수
+
+```sql
+SUBSTRING(string, start, length)
+SUBSTRING(string FROM start FOR length)
+```
+
+- string으로부터 substring의 **시작 지점(`start`)** 과 **길이(`length`)** 를 입력받아 substring을 추출하는 함수이다.
+- **시작 지점 (`start`)**
+    - 첫 번째 지점은 `1` 이다.
+    - 음수를 이용하면 string의 뒤에서부터 찾는다.
+- `SUBSTR()` 함수, `MID()` 함수와 동일하다.
+
+#### `LEFT()` 함수
+string에서 왼쪽부터 지정된 개수의 문자를 추출한다.
+
+```sql
+LEFT(string, number_of_chars)
+```
+
+#### `RIGHT()` 함수
+string의 오른쪽부터 지정된 개수의 문자를 추출한다.
+
+```sql
+RIGHT(string, number_of_chars)
+```
+
+<br>
+
+### 2.12 `SUBSTRING_INDEX()`: Delimiter 등장 횟수 기준으로 부분 문자열 추출하기
+> https://www.w3schools.com/mysql/func_mysql_substring_index.asp
+
+```sql
+SUBSTRING_INDEX(string, delimiter, number)
+```
+
+이때, `number`는 `delimiter`를 탐색할 횟수를 의미하며, positive 일수도, negative 일수도 있다.
+
+positive라면 마지막으로 찾은 `delimiter`의 왼쪽을, negative라면 마지막으로 찾은 `delimiter`의 오른쪽을 전부 반환한다.
+
+```sql
+SELECT SUBSTRING_INDEX("www.naver.com", ".", 1); # www
+SELECT SUBSTRING_INDEX("www.naver.com", ".", 2); # www.naver
+SELECT SUBSTRING_INDEX("www.naver.com", ".", 3); # www.naver.com
+
+SELECT SUBSTRING_INDEX("www.naver.com", ".", -1); # com
+SELECT SUBSTRING_INDEX("www.naver.com", ".", -2); # naver.com
+```
