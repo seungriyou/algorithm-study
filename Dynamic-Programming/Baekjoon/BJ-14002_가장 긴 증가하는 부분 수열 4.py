@@ -24,9 +24,16 @@ for i, d in enumerate(dp):
         max_length = d
 print(max_length)
 
-# LIS의 맨 마지막 원소부터 lis 채워나가기
+# 가장 긴 LIS의 마지막 원소로부터 역추적
 lis = []
-while max_idx >= 0: # or max_length > 0:
+# for i in range(N - 1, -1, -1):    # if w/o max_idx
+# for i in range(max_idx, -1, -1):
+#     if dp[i] == max_length:
+#         lis.append(nums[i])
+#         max_length -= 1
+#     if max_length == 0:
+#         break
+while max_idx >= 0 or max_length > 0:
     if dp[max_idx] == max_length:
         lis.append(nums[max_idx])
         max_length -= 1
