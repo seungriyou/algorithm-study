@@ -297,6 +297,56 @@ SELECT CONVERT('30일123 이상', UNSIGNED); # 30
 
 <br>
 
+### 1.10 `LIMIT`을 Subquery에 사용하는 방법
+> https://school.programmers.co.kr/learn/courses/30/lessons/164671
+
+다음과 같이 서브쿼리 내에서 `LIMIT`을 사용하여 `IN` 연산을 수행하면 오류가 발생한다.
+
+```sql
+SELECT CONCAT(file_id, file_name, file_ext)) AS file_path
+FROM USED_GOODS_FILE
+WHERE board_id IN (
+    SELECT board_id
+    FROM USED_GOODS_BOARD
+    ORDER BY views DESC
+    LIMIT 5 # top 5
+)
+ORDER BY file_id DESC;
+```
+
+> [!Warning]  
+> **`LIMIT` & `IN`/`ALL`/`ANY`/`SOME` subquery**를 지원하지 않는다는 오류가 발생한다.
+
+하지만, 서브쿼리 내에서 `LIMIT`으로 제한할 row 개수가 `1`보다 크다면 다음과 같이 **alias를 활용**하면 된다.
+
+```sql
+SELECT CONCAT(file_id, file_name, file_ext)) AS file_path
+FROM USED_GOODS_FILE
+WHERE board_id IN (
+    SELECT *
+    FROM (
+        SELECT board_id
+        FROM USED_GOODS_BOARD
+        ORDER BY views DESC
+        LIMIT 5 # top 5
+    ) AS B
+)
+ORDER BY file_id DESC;
+```
+
+물론, 서브쿼리 내에서 `LIMIT`으로 제한할 row 개수가 `1`이라면 `IN` 연산 대신 `=`를 사용하면 되긴 하다.
+
+```sql
+WHERE board_id = (
+    SELECT board_id
+    FROM USED_GOODS_BOARD
+    ORDER BY views DESC
+    LIMIT 1
+)
+```
+
+<br>
+
 ## 2. Functions
 ### 2.1 `GROUP_CONCAT`: GROUP BY 시, 문자열 CONCAT 하기
 > https://leetcode.com/problems/group-sold-products-by-the-date/
