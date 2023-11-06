@@ -3,7 +3,7 @@ import sys
 input = sys.stdin.readline
 
 N = int(input())
-dp = [0] * 1_001
+dp = [0] * 1_001    # N == 1이면 dp[2] 할당 시 IndexError 발생
 
 # dp[i]: i 번째까지 타일을 놓는 방법의 개수
 
