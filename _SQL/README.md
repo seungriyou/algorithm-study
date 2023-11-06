@@ -243,6 +243,9 @@ ORDER BY num DESC
 LIMIT 1;
 ```
 
+> [!IMPORTANT]
+> 추가 자료: https://dev.mysql.com/doc/refman/8.0/en/example-maximum-row.html
+
 <br>
 
 ### 1.8 `WITH` 절: 가상테이블 만들기
