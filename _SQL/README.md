@@ -350,6 +350,150 @@ WHERE board_id = (
 
 <br>
 
+### 1.11 `WITH RECURSIVE` 문: 재귀 쿼리
+> https://school.programmers.co.kr/learn/courses/30/lessons/59413
+> https://dev.mysql.com/doc/refman/8.0/en/with.html
+> https://inpa.tistory.com/entry/MYSQL-%F0%9F%93%9A-RECURSIVE-%EC%9E%AC%EA%B7%80-%EC%BF%BC%EB%A6%AC
+> https://umanking.github.io/2021/07/13/mysql-cte/
+
+#### CTE (Common Table Expression)
+
+- 임시로 쿼리 결과를 저장해놓고, 여러 번 참조해서 사용하는 용도이다.
+- `WITH` 문을 통해 CTE를 정의할 수 있다.
+    
+    ```sql
+    WITH
+      cte1 AS (SELECT a, b FROM table1),
+      cte2 AS (SELECT c, d FROM table2)
+    SELECT b, d FROM cte1 JOIN cte2
+    WHERE cte1.a = cte2.c;
+    ```
+    
+
+##### `WITH` 문
+
+```sql
+with_clause:
+    WITH [RECURSIVE]
+        cte_name [(col_name [, col_name] ...)] AS (subquery)
+        [, cte_name [(col_name [, col_name] ...)] AS (subquery)] ...
+```
+
+- column name은 괄호 `()` 안에 나열하거나, 혹은 `subquery` 파트의 첫 번째 `SELECT` 문에서 가져온다.
+    
+    ```sql
+    with_clause:
+        WITH [RECURSIVE]
+            cte_name [(col_name [, col_name] ...)] AS (subquery)
+            [, cte_name [(col_name [, col_name] ...)] AS (subquery)] ...
+    ```
+    
+    ```sql
+    WITH cte AS
+    (
+      SELECT 1 AS col1, 2 AS col2
+      UNION ALL
+      SELECT 3, 4
+    )
+    SELECT col1, col2 FROM cte;
+    ```
+    
+
+#### RECURSIVE CTE
+
+##### `WITH RECURSIVE` 문
+
+recursive CTE는 `WITH RECURSIVE` 문으로 생성하며, `subquery` 부분은 기본적으로 다음과 같은 구조를 가진다.
+
+```sql
+SELECT ...      -- return initial row set
+UNION ALL
+SELECT ...      -- return additional row sets
+```
+
+예시는 다음과 같다.
+
+```sql
+WITH RECURSIVE cte (n) AS
+(
+	-- Non-Recursive (첫번째 루프에서만 실행됨)
+  SELECT 1
+  UNION ALL
+	-- Recursive (읽어 올 때마다 행의 위치가 기억되어 다음번 읽어 올 때 다음 행으로 이동함)
+  SELECT n + 1 FROM cte WHERE n < 5
+)
+SELECT * FROM cte;
+```
+
+```sql
++------+
+| n    |
++------+
+|    1 |
+|    2 |
+|    3 |
+|    4 |
+|    5 |
++------+
+```
+
+만약 CTE의 recursive part가 점점 길어지는 column을 반환한다면, nonrecursive part의 column의 길이를 `CAST()` 함수를 통해 늘려야 한다.
+
+- `CAST()` 함수 사용 X
+    
+    ```sql
+    WITH RECURSIVE cte AS
+    (
+      SELECT 1 AS n, 'abc' AS str
+      UNION ALL
+      SELECT n + 1, CONCAT(str, str) FROM cte WHERE n < 3
+    )
+    SELECT * FROM cte;
+    ```
+    
+    ```sql
+    +------+------+
+    | n    | str  |
+    +------+------+
+    |    1 | abc  |
+    |    2 | abc  |
+    |    3 | abc  |
+    +------+------+
+    ```
+    
+- `CAST()` 함수 사용 O
+    
+    ```sql
+    WITH RECURSIVE cte AS
+    (
+      SELECT 1 AS n, **CAST('abc' AS CHAR(20))** AS str
+      UNION ALL
+      SELECT n + 1, CONCAT(str, str) FROM cte WHERE n < 3
+    )
+    SELECT * FROM cte;
+    ```
+    
+    ```sql
+    +------+--------------+
+    | n    | str          |
+    +------+--------------+
+    |    1 | abc          |
+    |    2 | abcabc       |
+    |    3 | abcabcabcabc |
+    +------+--------------+
+    ```
+    
+
+recursive CTE subquery 부분에서는 다음의 것들이 들어가서는 안 된다.
+
+- Aggregate functions such as `SUM()`
+- Window functions
+- `GROUP BY`
+- `ORDER BY`
+- `DISTINCT`
+
+<br>
+
 ## 2. Functions
 ### 2.1 `GROUP_CONCAT`: GROUP BY 시, 문자열 CONCAT 하기
 > https://leetcode.com/problems/group-sold-products-by-the-date/
