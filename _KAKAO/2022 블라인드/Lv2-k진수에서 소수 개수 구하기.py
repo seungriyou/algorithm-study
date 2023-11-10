@@ -1,8 +1,5 @@
 # https://school.programmers.co.kr/learn/courses/30/lessons/92335
 
-import re
-
-
 def solution(n, k):
     # k진수로 변환하기
     def k_base(n, k):
