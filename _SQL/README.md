@@ -1,6 +1,13 @@
 # MySQL CheatSheet 🔖
 > LeetCode, Programmers SQL 문제 풀이 중 새롭게 알게된 것들
 
+<br>
+
+> [!IMPORTANT]
+> 조건에 맞는 ID를 기반으로 counting 할 때는 `DISTINCT`를 잊지 말자!!
+
+<br>
+
 ## 1. Tips
 ### 1.1 GROUP BY 후 조건에 부합하는 값 COUNT 하는 방법
 > https://leetcode.com/problems/queries-quality-and-percentage/
