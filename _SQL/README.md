@@ -1000,3 +1000,40 @@ SELECT SUBSTRING_INDEX("www.naver.com", ".", 3); # www.naver.com
 SELECT SUBSTRING_INDEX("www.naver.com", ".", -1); # com
 SELECT SUBSTRING_INDEX("www.naver.com", ".", -2); # naver.com
 ```
+
+<br>
+
+## 3. About MySQL
+### 3.1 쿼리 실행 순서
+> - https://milena-pa.medium.com/sql-queries-and-their-order-of-operation-6b7d7ca4d197 
+> - https://nohriter.tistory.com/129
+
+#### SQL 쿼리의 실행 순서
+![image](https://github.com/seungriyou/algorithm-study/assets/43572543/d2dfd530-7a54-47a5-8246-8d265566a28f)
+
+1. **FROM (+ JOIN)**
+2. **WHERE**
+3. **GROUP BY**
+4. AGGREGATION
+5. **HAVING**
+6. WINDOW
+7. **SELECT**
+8. DISTINCT
+9. UNION / UNION ALL
+10. **ORDER BY**
+11. LIMT / OFFSET / FETCH
+
+#### SQL 쿼리의 문법 작성 순서
+![image](https://github.com/seungriyou/algorithm-study/assets/43572543/afc93381-b154-4b0f-8b6a-ccda07dc6d38)
+
+1. SELECT
+2. FROM
+3. WHERE
+4. GROUP BY
+5. HAVING
+6. ORDER BY
+
+<br>
+
+### 3.2 윈도우 함수 총정리 😎
+<https://github.com/seungriyou/algorithm-study/issues/1>
