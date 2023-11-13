@@ -2,6 +2,8 @@
 
 |         | Questions                                                                          |
 |------------|------------------------------------------------------------------------------------|
+| | [177. Nth Highest Salary](https://leetcode.com/problems/nth-highest-salary/) |
+| | [627. Swap Salary](https://leetcode.com/problems/swap-salary/) |
 | | [1407. Top Travellers](https://leetcode.com/problems/top-travellers/) |
 | | [608. Tree Node](https://leetcode.com/problems/tree-node/) |
 | | [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/) |
