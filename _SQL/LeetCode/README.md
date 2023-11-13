@@ -2,6 +2,7 @@
 
 |         | Questions                                                                          |
 |------------|------------------------------------------------------------------------------------|
+| | [1407. Top Travellers](https://leetcode.com/problems/top-travellers/) |
 | | [608. Tree Node](https://leetcode.com/problems/tree-node/) |
 | | [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/) |
 | | [180. Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/)     |
