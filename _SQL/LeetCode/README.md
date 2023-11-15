@@ -2,6 +2,7 @@
 
 |         | Questions                                                                          |
 |------------|------------------------------------------------------------------------------------|
+| | [262. Trips and Users](https://leetcode.com/problems/trips-and-users/) |
 | | [177. Nth Highest Salary](https://leetcode.com/problems/nth-highest-salary/) |
 | | [627. Swap Salary](https://leetcode.com/problems/swap-salary/) |
 | | [1407. Top Travellers](https://leetcode.com/problems/top-travellers/) |
