@@ -501,6 +501,95 @@ recursive CTE subquery 부분에서는 다음의 것들이 들어가서는 안 �
 
 <br>
 
+### 1.12 FULL OUTER JOIN
+> https://leetcode.com/problems/employees-with-missing-information/
+
+<img src="https://github.com/seungriyou/algorithm-study/assets/43572543/406cfdbe-446c-4003-8ba6-e1da8a80b31f" width="30%" />
+
+MySQL은 **FULL OUTER JOIN**을 native 하게 지원하지 않으므로, `LEFT JOIN`, `RIGHT JOIN`, `UNION`을 활용하여 구현할 수 있다.
+
+다음과 같은 두 개의 테이블을 **FULL OUTER JOIN** 해보자!
+
+```
+Employees table:
++-------------+----------+
+| employee_id | name     |
++-------------+----------+
+| 2           | Crew     |
+| 4           | Haven    |
+| 5           | Kristian |
++-------------+----------+
+
+Salaries table:
++-------------+--------+
+| employee_id | salary |
++-------------+--------+
+| 5           | 76071  |
+| 1           | 22517  |
+| 4           | 63539  |
++-------------+--------+
+```
+
+#### [1] column 순서 맞추지 않기
+
+`UNION` 시에는 첫 번째 결과에서 column 이름이 정해지기 때문에, 다음과 같이 column이 섞이게 된다. (하지만 조건으로 거르기만 하려면 큰 문제가 없다.)
+
+```sql
+SELECT * FROM Employees LEFT JOIN Salaries USING(employee_id)
+UNION 
+SELECT * FROM Employees RIGHT JOIN Salaries USING(employee_id)
+
+| employee_id | name     | salary   |
+| ----------- | -------- | -------- |
+| 2           | Crew     | null     |
+| 4           | Haven    | 63539    |
+| 5           | Kristian | 76071    |
+| 5           | 76071    | Kristian |
+| 1           | 22517    | null     |
+| 4           | 63539    | Haven    |
+```
+
+이때, `UNION`으로 이어진 각각의 SQL문 결과를 살펴보면 다음과 같다.
+
+```sql
+SELECT * FROM Employees LEFT JOIN Salaries USING(employee_id)
+
+| employee_id | name     | salary |
+| ----------- | -------- | ------ |
+| 2           | Crew     | null   |
+| 4           | Haven    | 63539  |
+| 5           | Kristian | 76071  |
+```
+
+```sql
+SELECT * FROM Employees RIGHT JOIN Salaries USING(employee_id)
+
+| employee_id | salary | name     |
+| ----------- | ------ | -------- |
+| 5           | 76071  | Kristian |
+| 1           | 22517  | null     |
+| 4           | 63539  | Haven    |
+```
+
+#### [2] column 순서 맞춰주기
+
+`SELECT` 시 column의 순서를 동일하게 맞춰준다면, 다음과 같이 깔끔한 `FULL OUTER JOIN`을 얻을 수 있다.
+
+```sql
+SELECT employee_id, name, salary FROM Employees LEFT JOIN Salaries USING(employee_id)
+UNION 
+SELECT employee_id, name, salary FROM Employees RIGHT JOIN Salaries USING(employee_id)
+
+| employee_id | name     | salary |
+| ----------- | -------- | ------ |
+| 2           | Crew     | null   |
+| 4           | Haven    | 63539  |
+| 5           | Kristian | 76071  |
+| 1           | null     | 22517  |
+```
+
+<br>
+
 ## 2. Functions
 ### 2.1 `GROUP_CONCAT`: GROUP BY 시, 문자열 CONCAT 하기
 > https://leetcode.com/problems/group-sold-products-by-the-date/
@@ -1037,3 +1126,24 @@ SELECT SUBSTRING_INDEX("www.naver.com", ".", -2); # naver.com
 
 ### 3.2 윈도우 함수 총정리 😎
 <https://github.com/seungriyou/algorithm-study/issues/1>
+
+<br>
+
+### 3.3 `UNION` 시 Column 순서 및 이름은 어떻게 결정될까?
+> https://leetcode.com/problems/rearrange-products-table/
+
+`UNION` 시에는, 첫 번째 쿼리에서 column 이름 및 순서가 결정되므로, 그 이후 쿼리에서는 alias를 설정하지 않아도 된다!
+
+```sql
+SELECT product_id, 'store1' AS store, store1 AS price   # -- UNION 시 first query에서 column name 결정하므로, 이후에는 alias 설정 안 해도 ok!
+FROM Products
+WHERE store1 IS NOT NULL
+UNION
+SELECT product_id, 'store2', store2
+FROM Products
+WHERE store2 IS NOT NULL
+UNION
+SELECT product_id, 'store3', store3
+FROM Products
+WHERE store3 IS NOT NULL;
+```
