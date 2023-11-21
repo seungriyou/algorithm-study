@@ -590,6 +590,38 @@ SELECT employee_id, name, salary FROM Employees RIGHT JOIN Salaries USING(employ
 
 <br>
 
+### 1.13 `GROUP BY` 후 특정 Column의 `MAX` 값에 해당하는 Row 찾기
+> https://school.programmers.co.kr/learn/courses/30/lessons/131123
+
+`GROUP BY`를 수행한 후, 특정 column의 `MAX` 값에 해당하는 row를 찾고 싶다면 다음의 방법 중 하나를 이용하면 된다.
+
+1. **subquery**
+    
+    ```sql
+    SELECT food_type, rest_id, rest_name, favorites
+    FROM REST_INFO
+    WHERE (food_type, favorites) IN (
+        SELECT food_type, MAX(favorites)
+        FROM REST_INFO
+        GROUP BY food_type
+    )
+    ORDER BY 1 DESC;
+    ```
+    
+2. **윈도우 함수 `RANK()` → 그 값이 1인 행 찾기**
+    
+    ```sql
+    SELECT food_type, rest_id, rest_name, favorites
+    FROM (
+        SELECT *, RANK() OVER (PARTITION BY food_type ORDER BY favorites DESC) AS _rank
+        FROM REST_INFO
+    ) R
+    WHERE _rank = 1
+    ORDER BY 1 DESC;
+    ```
+
+<br>
+
 ## 2. Functions
 ### 2.1 `GROUP_CONCAT`: GROUP BY 시, 문자열 CONCAT 하기
 > https://leetcode.com/problems/group-sold-products-by-the-date/
