@@ -12,3 +12,13 @@ FROM ANIMAL_OUTS A
 RIGHT JOIN HOUR_TABLE H ON H.hour = HOUR(A.datetime)
 GROUP BY 1
 ORDER BY 1;
+
+# ===== (23.11.23) REVIEWED =====
+SELECT hour, COALESCE(cnt, 0) as count
+FROM HOURS H
+LEFT JOIN (
+    SELECT HOUR(datetime) AS hour, COUNT(animal_id) AS cnt
+    FROM ANIMAL_OUTS
+    GROUP BY 1
+) A USING (hour)
+ORDER BY 1;
