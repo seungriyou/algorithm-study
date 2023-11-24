@@ -21,3 +21,28 @@ WHERE
     ) AND C.car_type IN ('SUV', '세단')
 HAVING fee >= 500000 AND fee < 2000000
 ORDER BY 3 DESC, 2, 1 DESC;
+
+# ===== (23.11.24) REVIEWED =====
+# car_type: '세단', 'SUV'
+# 대여 기간: 2022-11-01 ~ 2022-11-30 30일간
+# - end_date < 2022-11-01
+# - start_date > 2022-11-30
+# - start_date < 2022-11-01 AND end_date > 2022-11-30
+# 30일간 대여 금액: 50만원 이상, 200만원 미만
+
+SELECT C.car_id, C.car_type, TRUNCATE(30 * C.daily_fee * (1 - 0.01 * P.discount_rate), 0) AS fee
+FROM CAR_RENTAL_COMPANY_CAR C
+INNER JOIN CAR_RENTAL_COMPANY_DISCOUNT_PLAN P ON C.car_type = P.car_type
+WHERE
+    C.car_type IN ('세단', 'SUV')
+    AND C.car_id NOT IN (
+        SELECT DISTINCT car_id
+        FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+        WHERE
+            DATE_FORMAT(end_date, '%Y-%m') = '2022-11'
+            OR DATE_FORMAT(start_date, '%Y-%m') = '2022-11'
+            OR (DATE_FORMAT(start_date, '%Y-%m') < '2022-11' AND DATE_FORMAT(end_date, '%Y-%m') > '2022-11')
+    )
+    AND CAST(P.duration_type AS UNSIGNED) = 30
+HAVING fee BETWEEN 500000 AND 2000000
+ORDER BY 3 DESC, 2, 1 DESC;
