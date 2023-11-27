@@ -31,7 +31,7 @@
 |          | [1527. Patients With a Condition](https://leetcode.com/problems/patients-with-a-condition/) |
 |          | [1661. Average Time of Process per Machine](https://leetcode.com/problems/average-time-of-process-per-machine/) |
 |          | [1667. Fix Names in a Table](https://leetcode.com/problems/fix-names-in-a-table/) |
-|          | [1731. The Number of Employees Which Report to Each Employee](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/) |
-|          | [1789. Primary Department for Each Employee](https://leetcode.com/problems/primary-department-for-each-employee/) |
+|    💙      | [1731. The Number of Employees Which Report to Each Employee](https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/) |
+|    💙      | [1789. Primary Department for Each Employee](https://leetcode.com/problems/primary-department-for-each-employee/) |
 |  💙        | [1978. Employees Whose Manager Left the Company](https://leetcode.com/problems/employees-whose-manager-left-the-company/) |
 | 💙         | [2356. Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/) |
