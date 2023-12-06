@@ -12,3 +12,11 @@ GROUP BY A.machine_id;
 # , 3) AS processing_time
 # FROM Activity A
 # GROUP BY A.machine_id;
+
+# ===== (23.12.06) reviewed =====
+SELECT E.machine_id, ROUND(AVG(E.timestamp - S.timestamp), 3) AS processing_time
+FROM Activity E
+INNER JOIN Activity S
+    ON (E.machine_id, E.process_id) = (S.machine_id, S.process_id)
+    AND E.activity_type = 'end' AND S.activity_type = 'start'
+GROUP BY 1;
