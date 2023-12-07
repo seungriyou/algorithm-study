@@ -11,3 +11,8 @@
 SELECT *
 FROM Patients
 WHERE conditions REGEXP ('\\bDIAB1');
+
+# ===== (23.12.07) reviewed =====
+SELECT *
+FROM Patients
+WHERE conditions LIKE 'DIAB1%' OR conditions LIKE '% DIAB1%';
