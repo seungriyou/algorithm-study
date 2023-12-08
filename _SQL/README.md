@@ -631,13 +631,19 @@ SELECT employee_id, name, salary FROM Employees RIGHT JOIN Salaries USING(employ
 내부에 `DISTINCT`, `ORDER BY [컬럼명]`, `SEPERATOR` 등을 모두 적용할 수 있다.
 
 ```sql
-SELECT 
-    sell_date
-    , COUNT(DISTINCT product) AS num_sold
-    , GROUP_CONCAT(DISTINCT product SEPARATOR '&') AS products    # -- ORDER BY product 할 필요 없음
+SELECT
+    sell_date,
+    COUNT(DISTINCT product) AS num_sold,
+    GROUP_CONCAT(DISTINCT product ORDER BY product SEPARATOR ',') AS products
 FROM Activities
 GROUP BY sell_date
-ORDER BY sell_date, product;
+ORDER BY 1;
+```
+
+default separator는 `,`이므로, `,`를 이용하고 싶다면 다음과 같이 `SEPARATOR`를 생략해도 된다.
+
+```python
+GROUP_CONCAT(DISTINCT product ORDER BY product) AS products     # default separator = ','
 ```
 
 <br>
