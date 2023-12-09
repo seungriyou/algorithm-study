@@ -622,6 +622,32 @@ SELECT employee_id, name, salary FROM Employees RIGHT JOIN Salaries USING(employ
 
 <br>
 
+### 1.14 `SELECT` 절에서 생성한 Column을 `HAVING` 절에서 사용해도 되는가?
+> https://dev.mysql.com/doc/refman/8.0/en/select.html
+
+![image](https://github.com/seungriyou/algorithm-study/assets/43572543/e0eebd9d-0de5-429a-87a2-7c9ee6620f4d)
+
+**SQL 표준**에서 `HAVING` 절은 **`GROUP BY` 절**이나 **aggregate function에서 사용된 column만** 참조하도록 요구하지만, 
+
+**MySQL**에서 `HAVING` 절은 **`SELECT` 절**이나 **outer subqueries에 있는 columns**도 참조 가능하다.
+
+결론적으로, `SELECT` 절에서 생성한 Column을 `HAVING` 절에서 사용해도 된다!
+
+> https://leetcode.com/problems/list-the-products-ordered-in-a-period/
+
+그래서 다음과 같이 기존의 `unit` column에 aggregate function을 씌워 새롭게 alias를 `unit`이라는 이름으로 부여한 column을 `HAVING` 절에 사용할 수 있는 것이다.
+
+```sql
+SELECT product_name, SUM(unit) AS unit
+FROM Orders
+INNER JOIN Products USING(product_id)
+WHERE DATE_FORMAT(order_date, '%Y-%m') = '2020-02'
+GROUP BY product_id
+HAVING unit >= 100;
+```
+
+<br>
+
 ## 2. Functions
 ### 2.1 `GROUP_CONCAT`: GROUP BY 시, 문자열 CONCAT 하기
 > https://leetcode.com/problems/group-sold-products-by-the-date/
