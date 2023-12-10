@@ -21,8 +21,8 @@
 |                             | [550. Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/) |
 |                             | [1204. Last Person to Fit in the Bus](https://leetcode.com/problems/last-person-to-fit-in-the-bus/) |
 |                             | [1211. Queries Quality and Percentage](https://leetcode.com/problems/queries-quality-and-percentage/) |
-|                             | [1251. Average Selling Price](https://leetcode.com/problems/average-selling-price/) |
-|                             | [1280. Students and Examinations](https://leetcode.com/problems/students-and-examinations/) |
+| 💙                          | [1251. Average Selling Price](https://leetcode.com/problems/average-selling-price/) |
+| 💙                          | [1280. Students and Examinations](https://leetcode.com/problems/students-and-examinations/) |
 | 🧡 (window function / join) | [1321. Restaurant Growth](https://leetcode.com/problems/restaurant-growth/) |
 | 💙                          | [1327. List the Products Ordered in a Period](https://leetcode.com/problems/list-the-products-ordered-in-a-period/) |
 | 💙                          | [1341. Movie Rating](https://leetcode.com/problems/movie-rating/) |
