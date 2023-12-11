@@ -1,4 +1,4 @@
-# [LTC] 77 - COmbinations
+# [LTC] 77 - Combinations
 # https://leetcode.com/problems/combinations/
 
 from typing import List
