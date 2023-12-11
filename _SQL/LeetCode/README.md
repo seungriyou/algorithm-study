@@ -19,8 +19,8 @@
 |                             | [626. Exchange Seats](https://leetcode.com/problems/exchange-seats/) |
 |                             | [1070. Product Sales Analysis III](https://leetcode.com/problems/product-sales-analysis-iii/) |
 |                             | [550. Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/) |
-|                             | [1204. Last Person to Fit in the Bus](https://leetcode.com/problems/last-person-to-fit-in-the-bus/) |
-|                             | [1211. Queries Quality and Percentage](https://leetcode.com/problems/queries-quality-and-percentage/) |
+| 💙                          | [1204. Last Person to Fit in the Bus](https://leetcode.com/problems/last-person-to-fit-in-the-bus/) |
+| 💙                          | [1211. Queries Quality and Percentage](https://leetcode.com/problems/queries-quality-and-percentage/) |
 | 💙                          | [1251. Average Selling Price](https://leetcode.com/problems/average-selling-price/) |
 | 💙                          | [1280. Students and Examinations](https://leetcode.com/problems/students-and-examinations/) |
 | 🧡 (window function / join) | [1321. Restaurant Growth](https://leetcode.com/problems/restaurant-growth/) |

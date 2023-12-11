@@ -11,10 +11,21 @@ WHERE sum <= 1000
 LIMIT 1;
 
 # === JOIN ===
-# SELECT Q1.person_name
-# FROM Queue Q1, Queue Q2
-# WHERE Q1.turn >= Q2.turn
-# GROUP BY Q1.turn
-# HAVING SUM(Q2.weight) <= 1000
-# ORDER BY SUM(Q2.weight) DESC
-# LIMIT 1;
+SELECT Q1.person_name
+FROM Queue Q1, Queue Q2
+WHERE Q1.turn >= Q2.turn
+GROUP BY Q1.turn
+HAVING SUM(Q2.weight) <= 1000
+ORDER BY SUM(Q2.weight) DESC
+LIMIT 1;
+
+
+# ===== (23.12.11) reviewed =====
+SELECT person_name
+FROM (
+    SELECT turn, person_name, SUM(weight) OVER (ORDER BY turn) AS _sum
+    FROM Queue
+) Q
+WHERE _sum <= 1000
+ORDER BY turn DESC
+LIMIT 1;

@@ -8,3 +8,12 @@ SELECT query_name
 , ROUND(AVG(rating < 3) * 100, 2) AS poor_query_percentage
 FROM Queries
 GROUP BY query_name
+
+# ===== (23.12.11) reviewed =====
+SELECT
+    query_name,
+    ROUND(AVG(rating / position), 2) AS quality,
+    ROUND(AVG(rating < 3) * 100, 2) as poor_query_percentage
+FROM Queries
+WHERE query_name IS NOT NULL
+GROUP BY 1;
