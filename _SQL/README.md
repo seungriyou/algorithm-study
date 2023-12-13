@@ -591,9 +591,37 @@ SELECT employee_id, name, salary FROM Employees RIGHT JOIN Salaries USING(employ
 <br>
 
 ### 1.13 `GROUP BY` 후 특정 Column의 `MAX` 값에 해당하는 Row 찾기
-> https://school.programmers.co.kr/learn/courses/30/lessons/131123
 
 `GROUP BY`를 수행한 후, 특정 column의 `MAX` 값에 해당하는 row를 찾고 싶다면 다음의 방법 중 하나를 이용하면 된다.
+
+> https://leetcode.com/problems/product-sales-analysis-iii/
+
+1. **subquery**
+    
+    ```sql
+    SELECT product_id, year AS first_year, quantity, price
+    FROM Sales
+    WHERE (product_id, year) IN (
+        SELECT product_id, MIN(year)
+        FROM Sales
+        GROUP BY 1
+    );
+    ```
+    
+2. **윈도우 함수 `RANK()` → 그 값이 1인 행 찾기**
+    
+    ```sql
+    SELECT product_id, year AS first_year, quantity, price
+    FROM (
+        SELECT *, RANK() OVER(PARTITION BY product_id ORDER BY year) AS _rank
+        FROM Sales
+    ) S
+    WHERE _rank = 1;
+    ```
+
+<br>
+
+> https://school.programmers.co.kr/learn/courses/30/lessons/131123
 
 1. **subquery**
     
