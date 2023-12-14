@@ -14,8 +14,8 @@
 |                                 | [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/) |
 |                                 | [180. Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/)     |
 |                                 | [185. Department Top Three Salaries](https://leetcode.com/problems/department-top-three-salaries/) |
-|                                 | [585. Investments in 2016](https://leetcode.com/problems/investments-in-2016/) |
-|                                 | [602. Friend Requests II: Who Has the Most Friends](https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/) |
+| 💙                              | [585. Investments in 2016](https://leetcode.com/problems/investments-in-2016/) |
+| 💙                              | [602. Friend Requests II: Who Has the Most Friends](https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/) |
 | 🧡 (window function / if)       | [626. Exchange Seats](https://leetcode.com/problems/exchange-seats/) |
 | 🧡 (subquery / window function) | [1070. Product Sales Analysis III](https://leetcode.com/problems/product-sales-analysis-iii/) |
 | 💙                              | [550. Game Play Analysis IV](https://leetcode.com/problems/game-play-analysis-iv/) |
