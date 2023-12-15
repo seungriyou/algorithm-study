@@ -1,7 +1,5 @@
 # grind-75
 
-> 🔥 23.12.13 ~
-
 ## Overview
 
 LeetCode 커뮤니티에서 유명한 [Blind 75](https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions)의 업데이트 버전인 [Grind 75](https://www.grind75.com/)를 풀어보자!
@@ -41,3 +39,4 @@ LeetCode 커뮤니티에서 유명한 [Blind 75](https://leetcode.com/discuss/ge
 - <https://www.techinterviewhandbook.org/best-practice-questions/>
 - <https://sophuu.tistory.com/112>
 - <https://github.com/tsiege/Tech-Interview-Cheat-Sheet>
+- <https://www.educative.io/blog/coding-interview-leetcode-patterns>
