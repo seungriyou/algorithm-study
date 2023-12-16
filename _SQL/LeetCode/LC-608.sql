@@ -41,3 +41,15 @@ SELECT
         ELSE 'Leaf'
     END AS type
 FROM Tree;
+
+
+# ===== (21.12.16) reviewed =====
+SELECT
+    DISTINCT P.id,
+    CASE
+        WHEN P.p_id IS NULL THEN 'Root'
+        WHEN C.id IS NULL THEN 'Leaf'
+        ELSE 'Inner'
+    END AS type
+FROM Tree P
+LEFT JOIN Tree C ON P.id = C.p_id;
