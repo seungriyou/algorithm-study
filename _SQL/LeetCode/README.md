@@ -7,9 +7,9 @@
 |                                     | [601. Human Traffic of Stadium](https://leetcode.com/problems/human-traffic-of-stadium/) |
 |                                     | [1179. Reformat Department Table](https://leetcode.com/problems/reformat-department-table/) |
 |                                     | [262. Trips and Users](https://leetcode.com/problems/trips-and-users/) |
-|                                     | [177. Nth Highest Salary](https://leetcode.com/problems/nth-highest-salary/) |
-|                                     | [627. Swap Salary](https://leetcode.com/problems/swap-salary/) |
-|                                     | [1407. Top Travellers](https://leetcode.com/problems/top-travellers/) |
+| 🧡 (limit offset / window function) | [177. Nth Highest Salary](https://leetcode.com/problems/nth-highest-salary/) |
+| 💙                                  | [627. Swap Salary](https://leetcode.com/problems/swap-salary/) |
+| 💙                                  | [1407. Top Travellers](https://leetcode.com/problems/top-travellers/) |
 | 💙                                  | [608. Tree Node](https://leetcode.com/problems/tree-node/) |
 | 🧡 (window function / limit offset) | [176. Second Highest Salary](https://leetcode.com/problems/second-highest-salary/) |
 | 🧡 (join)                           | [180. Consecutive Numbers](https://leetcode.com/problems/consecutive-numbers/)     |
