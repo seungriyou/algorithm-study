@@ -14,3 +14,21 @@ WHERE _group IN (
     GROUP BY _group
     HAVING COUNT(id) >= 3
 );
+
+# ===== (23.12.19) reviewed =====
+WITH T AS (
+    SELECT
+        *,
+        id - ROW_NUMBER() OVER (ORDER BY id) AS _group
+    FROM Stadium
+    WHERE people >= 100
+)
+
+SELECT id, visit_date, people
+FROM T
+WHERE _group IN (
+    SELECT _group
+    FROM T
+    GROUP BY _group
+    HAVING COUNT(id) >= 3
+);
