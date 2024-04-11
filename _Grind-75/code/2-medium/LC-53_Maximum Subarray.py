@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/maximum-subarray/
 
+from typing import List
+
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         def divide_and_conquer(nums, i, j):
@@ -62,3 +64,36 @@ class Solution:
             max_sum = max(max_sum, dp[i])
 
         return max_sum
+
+###### review ######
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        """O(1)"""
+
+        for i in range(1, len(nums)):
+            if nums[i - 1] > 0:
+                nums[i] += nums[i - 1]
+
+        return max(nums)
+
+    def maxSubArray2(self, nums: List[int]) -> int:
+        """O(1)"""
+
+        max_sum = prev = nums[0]
+
+        for i in range(1, len(nums)):
+            prev = max(prev + nums[i], nums[i])
+            max_sum = max(max_sum, prev)
+
+        return max_sum
+
+    def maxSubArray1(self, nums: List[int]) -> int:
+        """O(N)"""
+
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
+
+        for i in range(1, len(nums)):
+            dp[i] = max(0, dp[i - 1]) + nums[i]
+
+        return max(dp)

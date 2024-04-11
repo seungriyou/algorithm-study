@@ -41,3 +41,25 @@ class Solution:
                 result += c
 
         return result + 1 if contains_odd_cnt else result
+
+###### review ######
+from collections import Counter
+
+
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        counter = Counter(s)
+        appeared_odd = False
+        res = 0
+
+        for c, cnt in counter.items():
+            # 홀수라면
+            if cnt & 1:
+                res += cnt - 1
+                appeared_odd = True
+
+            # 짝수라면
+            else:
+                res += cnt
+
+        return res + 1 if appeared_odd else res

@@ -55,3 +55,36 @@ class Solution:
                 return False
 
         return True
+
+###### review ######
+class Solution:
+    def isAnagram2(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+
+        _s = sorted(s)
+        _t = sorted(t)
+
+        return _s == _t
+
+    def isAnagram1(self, s: str, t: str) -> bool:
+        # 훨씬 빠르다..!
+
+        from collections import Counter
+
+        if len(s) != len(t):
+            return False
+
+        return Counter(s) == Counter(t)
+
+    def isAnagram(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+
+        counter = [0] * 26
+        for _s in s:
+            counter[ord(_s) - ord('a')] += 1
+        for _t in t:
+            counter[ord(_t) - ord('a')] -= 1
+
+        return not any(counter)
