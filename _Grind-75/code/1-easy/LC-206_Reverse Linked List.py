@@ -35,3 +35,38 @@ class Solution:
             return reverse(node, next)
 
         return reverse(None, head)
+
+
+###### review ######
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def reverse(prev, curr):
+            # base condition
+            if not curr:
+                return prev
+
+            # next 얻어놓기
+            next = curr.next
+
+            # curr.next를 prev로 변경
+            curr.next = prev
+
+            # prev & curr를 모두 한 칸씩 전진
+            return reverse(curr, next)
+
+        return reverse(None, head)
+
+    def reverseList1(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev, curr = None, head
+
+        while curr:
+            # next 얻어놓기
+            next = curr.next
+
+            # curr.next를 prev로 변경
+            curr.next = prev
+
+            # prev & curr를 모두 한 칸씩 전진
+            prev, curr = curr, next
+
+        return prev
