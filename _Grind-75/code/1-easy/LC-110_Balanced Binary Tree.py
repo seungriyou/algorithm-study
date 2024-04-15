@@ -3,11 +3,12 @@
 from typing import Optional
 
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def isBalanced(self, root: Optional['TreeNode']) -> bool:
         def check(node):
@@ -29,3 +30,22 @@ class Solution:
 
         # return 값이 flag 값이 아니라면 True
         return check(root) != -1
+
+
+###### review ######
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        def check_balanced(node):
+            if node is None:
+                return 0
+
+            left, right = check_balanced(node.left), check_balanced(node.right)
+
+            # balanced가 아닌지 확인
+            if left == -1 or right == -1 or abs(left - right) > 1:
+                return -1
+
+            # 현재까지의 depth
+            return max(left, right) + 1
+
+        return check_balanced(root) != -1

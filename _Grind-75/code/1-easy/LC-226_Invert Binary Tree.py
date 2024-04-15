@@ -41,3 +41,48 @@ class Solution:
             self.invertTree(root.right)
 
         return root
+
+
+###### review ######
+class Solution:
+    def invertTree1(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        """bottom-up"""
+
+        def invert(node):
+            if node is None:
+                return None
+
+            # left와 right의 subtree를 바꿔버린다!
+            node.left, node.right = invert(node.right), invert(node.left)
+
+            return node
+
+        return invert(root)
+
+    def invertTree2(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        """bottom-up"""
+
+        def invert(node):
+            # 더 줄여서 다음과 같이 작성할 수 있다!
+            if node:
+                node.left, node.right = invert(node.right), invert(node.left)
+            return node
+
+        return invert(root)
+
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        """top-down"""
+        from collections import deque
+
+        q = deque([root])
+
+        while q:
+            node = q.popleft()
+
+            if node:
+                node.left, node.right = node.right, node.left
+
+                q.append(node.left)
+                q.append(node.right)
+
+        return root
