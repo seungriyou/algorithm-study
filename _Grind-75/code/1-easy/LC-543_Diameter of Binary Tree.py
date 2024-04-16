@@ -36,3 +36,30 @@ class Solution:
         max_depth(root)
 
         return diameter
+
+
+###### review ######
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        max_length = 0
+
+        def max_depth(node):
+            nonlocal max_length
+
+            # base condition
+            if not node:
+                return 0
+
+            # recur
+            left = max_depth(node.left)
+            right = max_depth(node.right)
+
+            # max_length 업데이트
+            max_length = max(max_length, left + right)
+
+            # 현재 노드의 max depth 반환
+            return max(left, right) + 1
+
+        max_depth(root)
+
+        return max_length

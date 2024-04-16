@@ -63,3 +63,40 @@ class Solution:
         right_max_depth = self.maxDepth(root.right)
 
         return max(left_max_depth, right_max_depth) + 1
+
+
+###### review ######
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        """iterative"""
+
+        level = [root] if root else []
+        depth = 0
+
+        while level:
+            _level = []
+            depth += 1
+
+            for node in level:
+                if node.left:
+                    _level.append(node.left)
+                if node.right:
+                    _level.append(node.right)
+
+            level = _level
+
+        return depth
+
+    def maxDepth_r(self, root: Optional[TreeNode]) -> int:
+        """recursive"""
+
+        def max_depth(node):
+            if node is None:
+                return 0
+
+            left = max_depth(node.left)
+            right = max_depth(node.right)
+
+            return max(left, right) + 1
+
+        return max_depth(root)
