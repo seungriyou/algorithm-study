@@ -36,3 +36,34 @@ class Solution:
             return self.lowestCommonAncestor(root.right, p, q)
 
         return root
+
+
+###### review ######
+class Solution:
+    def lowestCommonAncestor1(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        """iterative"""
+
+        while root:
+            if p.val < root.val > q.val:
+                root = root.left
+
+            elif p.val > root.val < q.val:
+                root = root.right
+
+            else:
+                return root
+
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        """recursive"""
+
+        def find_lca(node):
+            if p.val < node.val > q.val:
+                return find_lca(node.left)
+
+            elif p.val > node.val < q.val:
+                return find_lca(node.right)
+
+            else:
+                return node
+
+        return find_lca(root)
