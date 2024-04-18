@@ -39,3 +39,43 @@ class Solution:
         inorder(root)
 
         return is_asc_sorted(inorder_path)
+
+
+###### review ######
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        import math
+
+        def in_valid_range(node, floor, ceil):
+            # node가 아니면 True 반환
+            if not node:
+                return True
+
+            # 현재 node가 알맞은 범위 내에 있다면, left와 right에 대해서 재귀 호출
+            if floor < node.val < ceil:
+                return in_valid_range(node.left, floor, node.val) and in_valid_range(node.right, node.val, ceil)
+
+            # 현재 node가 알맞은 범위 내에 있지 않다면, False 반환
+            else:
+                return False
+
+        return in_valid_range(root, -math.inf, math.inf)
+
+    def isValidBST2(self, root: Optional[TreeNode]) -> bool:
+        path = []
+
+        def inorder(node):
+            if not node:
+                return
+
+            inorder(node.left)
+            path.append(node.val)
+            inorder(node.right)
+
+        inorder(root)
+
+        for i in range(len(path) - 1):
+            if path[i] >= path[i + 1]:
+                return False
+
+        return True

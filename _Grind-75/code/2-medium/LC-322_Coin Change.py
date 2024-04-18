@@ -59,3 +59,55 @@ class Solution:
                     dp[i] = min(dp[i], dp[i - coin] + 1)
 
         return dp[amount] if dp[amount] != INF else -1
+
+
+###### review ######
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        """bfs"""
+
+        from collections import deque
+
+        q = deque([(0, 0)])  # (coin 금액, coin 개수)
+        visited = {0}  # 이미 찾은 coin 금액
+
+        while q:
+            amnt, num = q.popleft()
+
+            if amnt == amount:
+                return num
+
+            for coin in coins:
+                if (new_amnt := amnt + coin) <= amount and new_amnt not in visited:
+                    q.append((new_amnt, num + 1))
+                    visited.add(new_amnt)
+
+        return -1
+
+    def coinChange_t(self, coins: List[int], amount: int) -> int:
+        """top down"""
+
+        @cache
+        def dp(amnt):
+            if amnt == 0:
+                return 0
+
+            if amnt < 0:
+                return math.inf
+
+            return min(dp(amnt - coin) + 1 for coin in coins)
+
+        return dp(amount) if dp(amount) != math.inf else -1
+
+    def coinChange_b(self, coins: List[int], amount: int) -> int:
+        """bottom up"""
+        INF = amount + 1
+
+        dp = [0] + [INF] * amount
+
+        for amnt in range(1, amount + 1):
+            for coin in coins:
+                if amnt >= coin:
+                    dp[amnt] = min(dp[amnt], dp[amnt - coin] + 1)
+
+        return dp[amount] if dp[amount] != INF else -1
