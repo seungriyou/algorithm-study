@@ -115,3 +115,73 @@ class Solution:
         cnt = topo_sort()
 
         return cnt == numCourses
+
+
+###### review ######
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        """3-State DFS"""
+
+        # graph 만들기
+        graph = [[] for _ in range(numCourses)]
+        for a, b in prerequisites:
+            graph[b].append(a)
+
+        # visited 뿐만 아니라, 현재 보고 있는 path를 기록하기 위한 current_path도 생성
+        current_path, visited = set(), set()
+
+        def has_cycle(pos):
+            # visited에 있으면 이미 방문했으므로 방문 X
+            if pos in visited:
+                return False
+
+            # current_path에 있으면 cycle 발생
+            if pos in current_path:
+                return True
+
+            # current_path에 현재 node 기록 후, npos 순회하며 재귀적으로 확인
+            current_path.add(pos)
+            for npos in graph[pos]:
+                if has_cycle(npos):
+                    return True
+            current_path.remove(pos)
+
+            # 현재 node visited 처리
+            visited.add(pos)
+
+            return False
+
+        # 모든 node 순회하며 검사
+        for i in range(numCourses):
+            if has_cycle(i):
+                return False
+
+        return True
+
+    def canFinish2(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        """topo sort (BFS)"""
+
+        from collections import deque
+
+        # graph 만들기
+        graph = [[] for _ in range(numCourses)]
+        indegree = [0] * numCourses
+        for a, b in prerequisites:
+            graph[b].append(a)
+            indegree[a] += 1
+
+        # topological sort(bfs)
+        q = deque([i for i in range(numCourses) if indegree[i] == 0])
+        cnt = 0
+
+        while q:
+            pos = q.popleft()
+            cnt += 1
+
+            for npos in graph[pos]:
+                indegree[npos] -= 1
+
+                if indegree[npos] == 0:
+                    q.append(npos)
+
+        return cnt == numCourses
