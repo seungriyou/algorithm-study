@@ -60,3 +60,62 @@ class Solution:
                 return [a, b]
             else:
                 union_parent(parent, a, b)
+
+
+###### review ######
+class Solution:
+    def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+        """dfs"""
+
+        n = len(edges)
+
+        graph = [[] for _ in range(n + 1)]
+
+        def has_cycle(u, v, visited):
+            # base condition
+            if u == v:
+                return True
+
+            # recur
+            for nu in graph[u]:
+                if nu not in visited:
+                    visited.add(nu)
+                    if has_cycle(nu, v, visited):
+                        return True
+
+            return False
+
+        for u, v in edges:
+            # u ~ v edge로 인해 cycle이 생긴다면, 반환
+            if has_cycle(u, v, set()):
+                return [u, v]
+
+            # u ~ v edge를 graph에 추가하기
+            graph[u].append(v)
+            graph[v].append(u)
+
+    def findRedundantConnection2(self, edges: List[List[int]]) -> List[int]:
+        """union find"""
+
+        n = len(edges)
+
+        def find_parent(x):
+            if x != parent[x]:
+                parent[x] = find_parent(parent[x])
+
+            return parent[x]
+
+        def union_parent(x, y):
+            x, y = find_parent(x), find_parent(y)
+
+            if x < y:
+                parent[y] = x
+            else:
+                parent[x] = y
+
+        parent = list(range(n + 1))
+
+        for u, v in edges:
+            if find_parent(u) == find_parent(v):
+                return [u, v]
+            union_parent(u, v)

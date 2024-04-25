@@ -78,3 +78,73 @@ class Solution:
                     k -= 1
 
         return result
+
+
+###### review ######
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        """two pointer (fast ver)"""
+
+        result = []
+
+        nums.sort()
+
+        n = len(nums)
+
+        for a in range(n - 2):
+            # a가 가리키는 숫자가 이전과 같다면 빠르게 넘어가기
+            if a > 0 and nums[a] == nums[a - 1]:
+                continue
+
+            # b와 c를 a 오른쪽 영역에서 좁혀오며 확인
+            b, c = a + 1, n - 1
+            while b < c:
+                _sum = nums[a] + nums[b] + nums[c]
+
+                if _sum < 0:
+                    b += 1
+
+                elif _sum > 0:
+                    c -= 1
+
+                else:
+                    result.append([nums[a], nums[b], nums[c]])
+
+                    # 중복된 원소 건너뛰기
+                    while b < c and nums[b] == nums[b + 1]:
+                        b += 1
+                    while b < c and nums[c] == nums[c - 1]:
+                        c -= 1
+
+                    b += 1
+                    c -= 1
+
+        return result
+
+    def threeSum2(self, nums: List[int]) -> List[List[int]]:
+        """two pointer (slow ver) (중복 건너뛰지 X)"""
+
+        result = set()
+
+        nums.sort()
+
+        n = len(nums)
+
+        for a in range(n - 2):
+            b, c = a + 1, n - 1
+
+            while b < c:
+                _sum = nums[a] + nums[b] + nums[c]
+
+                if _sum < 0:
+                    b += 1
+
+                elif _sum > 0:
+                    c -= 1
+
+                else:
+                    result.add((nums[a], nums[b], nums[c]))
+                    b += 1
+                    c -= 1
+
+        return list(result)
