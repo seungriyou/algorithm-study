@@ -71,3 +71,56 @@ class Solution:
         # left와 right 중 한쪽에만 p와 q가 위치한다면, 위치한 쪽이 LCA
         else:
             return left or right
+
+
+###### review ######
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        """iter (bottom -> up)"""
+
+        # 1. {노드: 부모 노드} dict 만들기
+        parents = {root: None}
+        level = [root]
+
+        while level:
+            # while (p not in parents or q not in parents):
+            _level = []
+            for node in level:
+                if node.left:
+                    parents[node.left] = node
+                    _level.append(node.left)
+                if node.right:
+                    parents[node.right] = node
+                    _level.append(node.right)
+            level = _level
+
+        # 2. p부터 root로 올라가면서 path set() 기록
+        path = set()
+        node = p
+        while node:
+            path.add(node)
+            node = parents[node]
+
+        # 3. q부터 root로 올라가면서 path에 있는 node를 방문한 순간 return
+        node = q
+        while node not in path:
+            node = parents[node]
+
+        return node
+
+    def lowestCommonAncestor2(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        """recur (top -> down)"""
+
+        # 1. root가 p나 q에 도달했거나 None이라면 root 반환
+        if root == p or root == q or root is None:
+            return root
+
+        # 2. recursive 하게 child 탐색하며 p, q 찾기
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+
+        # 3. left와 right에서 각각 p, q가 발견되었으면 root 반환, 아니라면 발견된 쪽을 반환
+        if left and right:
+            return root
+        else:
+            return left or right
