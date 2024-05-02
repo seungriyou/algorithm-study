@@ -55,3 +55,57 @@ class Solution:
                 dp[i] += dp[i - 2]
 
         return dp[n - 1]
+
+
+###### review ######
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        """O(1) DP"""
+
+        # base condition
+        p2, p1 = 1, 1 if s[0] != "0" else 0
+
+        for i in range(1, len(s)):
+            tmp = 0
+
+            # 1-step
+            if s[i] != "0":
+                tmp += p1
+
+            # 2-step
+            if 10 <= int(s[i - 1:i + 1]) <= 26:
+                tmp += p2
+
+            p2, p1 = p1, tmp
+
+        return p1
+
+    def numDecodings2(self, s: str) -> int:
+        """1D DP"""
+
+        n = len(s)
+        dp = [0] * n  # dp[i] = s[i] 까지 봤을 때, 가능한 decoding 개수의 총합
+
+        # early stop
+        if s[0] == "0":
+            return 0
+        if n == 1:
+            return 1
+
+        # base condition (dp[0], dp[1])
+        dp[0] = 1
+        if s[1] != "0":
+            dp[1] += dp[0]
+        if 10 <= int(s[0:2]) <= 26:
+            dp[1] += 1
+
+        for i in range(2, n):
+            # 1-step: s[i]가 1~9 사이 값, 즉 0이 아니면, 1-step 전의 값 더하기
+            if s[i] != "0":
+                dp[i] += dp[i - 1]
+
+            # 2-step: s[i - 1]~s[i]가 10~26 사이 값이면, 2-step 전의 값 더하기
+            if 10 <= int(s[i - 1:i + 1]) <= 26:
+                dp[i] += dp[i - 2]
+
+        return dp[n - 1]

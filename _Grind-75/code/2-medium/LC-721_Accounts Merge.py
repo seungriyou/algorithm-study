@@ -91,3 +91,86 @@ class Solution2:
                 result.append([name] + sorted(list(emails)))
 
         return result
+
+
+###### review ######
+class Solution:
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        """union find"""
+        from collections import defaultdict
+
+        def find_parent(x):
+            if x != parent[x]:
+                parent[x] = find_parent(parent[x])
+            return parent
+
+        def union_parent(child, parent):
+            child, parent = find_parent(child), find_parent(parent)
+            parent[child] = parent
+
+        n = len(accounts)  # account 개수
+        parent = list(range(n))  # account를 merge 할 것이므로
+
+        # 1. union
+        ownership = {}  # {email: account idx}
+        for i, (name, *emails) in enumerate(accounts):
+            for email in emails:
+                # 이미 해당 email 정보가 ownership에 존재한다면, union
+                if email in ownership:
+                    union_parent(i, ownership[email])
+
+                # ownership 업데이트
+                ownership[email] = i
+
+        # 2. res
+        res = defaultdict(list)
+        for email, idx in ownership.items():
+            res[find_parent(idx)].append(email)
+
+        return [[accounts[idx][0], *emails] for idx, emails in res.items()]
+
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        """DFS"""
+        from collections import defaultdict
+
+        # graph 구성 ({email: [account idx]})
+        graph = defaultdict(list)
+        for i, (name, *emails) in enumerate(accounts):
+            for email in emails:
+                graph[email].append(i)
+
+        # dfs -> 같은 email을 가지는 account 끼리는 neighbor
+        visited = [False] * len(accounts)
+
+        def dfs(idx: int, emails: set[int]):
+            """
+            idx: account의 index
+            emails: 현재 person에 해당하는 email로 구성된 set
+            """
+            visited[idx] = True
+
+            # idx에 해당하는 account의 email 순회
+            for i in range(1, len(accounts[idx])):
+                email = accounts[idx][i]
+
+                # 이미 기록한 email이라면 넘어가기
+                if email in emails:
+                    continue
+
+                # 현재 account에 속하는 email 기록
+                emails.add(email)
+
+                # 해당 email을 가지고 있는 account에 대해서 dfs
+                for nidx in graph[email]:
+                    if not visited[nidx]:
+                        dfs(nidx, emails)
+
+        # 모든 account에 대해 각각 dfs 수행 (w/ visited)
+        res = []
+        for i, (name, *emails) in enumerate(accounts):
+            if not visited[i]:
+                emails = set()
+                dfs(i, emails)
+                res.append([name, *sorted(emails)])
+
+        return res
