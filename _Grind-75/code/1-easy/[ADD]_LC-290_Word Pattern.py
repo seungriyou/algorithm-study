@@ -76,3 +76,85 @@ class Solution:
             stop[s] = p
 
         return True
+
+
+###### review ######
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        """1-dict"""
+
+        """
+        p_to_s 혹은 s_to_p 중 p_to_s만 사용하는 경우를 살펴보자.
+
+            pattern s                   p_to_s                      result  correct
+            ------- ------------------- --------------------------- ------- -------
+        <1> abba    dog cat cat cow     {a: dog, b: cat}            False   O
+        <2> abbc    dog cat cat cat     {a: dog, b: cat, c: cat}    True    X
+
+        <1>, <2>는 모두 False를 반환해야 하지만,
+        <1> 케이스에서만 올바르게 False를 반환하며, <2> 케이스에서는 True를 반환하게 된다.
+        <2> 케이스를 1-dict로 동작할 수 있도록 하려면, pattern의 종류 개수와 s의 종류 개수가 동일한지를 살펴보면 된다.
+        """
+
+        ss = s.split()
+
+        # 개수가 동일하지 않다면 빠르게 stop
+        if len(pattern) != len(ss):
+            return False
+
+        # pattern의 종류 개수와 s의 종류 개수가 동일하지 않다면 빠르게 stop
+        if len(set(pattern)) != len(set(ss)):
+            return False
+
+        # 1-dict
+        p_to_s = {}
+
+        for p, s in zip(pattern, ss):
+            # if p in p_to_s and p_to_s[p] != s:
+            #     return False
+
+            # p_to_s[p] = s
+
+            if p not in p_to_s:
+                p_to_s[p] = s
+
+            elif p_to_s[p] != s:
+                return False
+
+        return True
+
+    def wordPattern2(self, pattern: str, s: str) -> bool:
+        """2-dict"""
+
+        ss = s.split()
+
+        # 개수가 동일하지 않다면 빠르게 stop
+        if len(pattern) != len(ss):
+            return False
+
+        # p_to_s = {pattern: word}, s_to_p = {word: pattern}
+        p_to_s, s_to_p = {}, {}
+        """
+        p_to_s 만 사용하면, <1> 케이스에서는 옳은 결과를 반환하지만, <2> 케이스에서는 올바르지 않은 결과를 반환하게 된다.
+
+            pattern s                   p_to_s                      correct
+            ------- ------------------- --------------------------- -------
+        <1> abba    dog cat cat dog     {a: dog, b: cat}            O
+        <2> abbc    dog cat cat cat     {a: dog, b: cat, c: cat}    X
+
+        따라서 {word: pattern}을 저장하는 s_to_p도 확인해야 한다.
+        """
+
+        for p, s in zip(pattern, ss):
+            # p_to_s 확인
+            if p in p_to_s and p_to_s[p] != s:
+                return False
+
+            # s_to_p 확인
+            if s in s_to_p and s_to_p[s] != p:
+                return False
+
+            # 기록하기
+            p_to_s[p], s_to_p[s] = s, p
+
+        return True
