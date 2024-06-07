@@ -16,3 +16,13 @@ WHERE skill_code & (
     WHERE name IN ('Python', 'C#')
 )
 ORDER BY 1;
+
+
+##### REVIEW #####
+SELECT id, email, first_name, last_name
+FROM DEVELOPERS
+WHERE
+    # skill_code & (SELECT code FROM SKILLCODES WHERE name = 'Python')
+    # OR skill_code & (SELECT code FROM SKILLCODES WHERE name = 'C#')
+    skill_code & (SELECT SUM(code) FROM SKILLCODES WHERE name IN ('Python', 'C#'))
+ORDER BY 1;
