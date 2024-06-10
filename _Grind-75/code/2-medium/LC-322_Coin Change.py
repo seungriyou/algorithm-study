@@ -111,3 +111,49 @@ class Solution:
                     dp[amnt] = min(dp[amnt], dp[amnt - coin] + 1)
 
         return dp[amount] if dp[amount] != INF else -1
+
+
+##### ADD #####
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        """
+        1D DP (2D DP가 dp[i - 1][j], dp[i][j - coins[i - 1]]만 사용하므로, 1D로 optimize 가능)
+        """
+
+        INF = amount + 1
+
+        dp = [INF] * (amount + 1)
+        dp[0] = 0
+
+        # for amnt in range(1, amount + 1):
+        #     for coin in coins:
+        #         if amnt >= coin:
+        #             dp[amnt] = min(dp[amnt], dp[amnt - coin] + 1)
+
+        for coin in coins:
+            for amnt in range(coin, amount + 1):
+                dp[amnt] = min(dp[amnt], dp[amnt - coin] + 1)
+
+        return dp[amount] if dp[amount] != INF else -1
+
+
+def coinChange2(self, coins: List[int], amount: int) -> int:
+        """2D DP"""
+
+        INF = amount + 1
+
+        n = len(coins)
+
+        # dp[i][j]: i번째 coin까지 확인했을 때, j만큼의 amount를 만들 수 있는 동전의 최소 개수
+        dp = [[INF] * (amount + 1) for _ in range(n + 1)]
+        dp[0][0] = 0
+
+        for i in range(1, n + 1):  # -- 물건 (coins)
+            dp[i][0] = 0
+            for j in range(1, amount + 1):  # -- 임시 용량 (amount)
+                if j >= coins[i - 1]:
+                    dp[i][j] = min(dp[i - 1][j], dp[i][j - coins[i - 1]] + 1)
+                else:
+                    dp[i][j] = dp[i - 1][j]
+
+        return dp[n][amount] if dp[n][amount] != INF else -1
