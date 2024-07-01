@@ -22,6 +22,27 @@ def solution(progresses, speeds):
     return answer
 
 
+from math import ceil
+
+
+def solution2(progresses, speeds):
+    answer = []
+
+    days = []
+    for p, s in zip(progresses, speeds):
+        days.append(ceil((100 - p) / s))
+
+    stack = []
+    for day in days:
+        if stack and stack[-1] >= day:
+            answer[-1] += 1
+        else:
+            stack.append(day)
+            answer.append(1)
+
+    return answer
+
+
 progresses = [95, 90, 99, 99, 80, 99]
 speeds = [1, 1, 1, 1, 1, 1]
 assert [1, 3, 2] == solution(progresses, speeds)

@@ -14,3 +14,19 @@ def solution(prices):
 
 prices = [1, 2, 3, 2, 3]
 print(solution(prices))     # should print 	[4, 3, 1, 1, 0]
+
+
+##### review #####
+def solution(prices):
+    n = len(prices)
+
+    answer = [n - i - 1 for i in range(n)]
+    stack = []
+
+    for i in range(n):
+        while stack and prices[stack[-1]] > prices[i]:
+            j = stack.pop()
+            answer[j] = i - j
+        stack.append(i)
+
+    return answer

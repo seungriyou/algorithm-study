@@ -35,5 +35,42 @@ def solution(maps):
     return maps[-1][-1] if maps[-1][-1] > 1 else -1
 
 
+def solution2(maps):
+    answer = 0
+
+    """
+    BFS (최단거리)
+    - 목표에 도달하면 거리
+    - 목표에 도달하지 못하면 -1
+    """
+
+    dr, dc = [-1, 1, 0, 0], [0, 0, -1, 1]
+    N, M = len(maps), len(maps[0])
+
+    def bfs():
+        q = deque([(0, 0)])
+        distance = [[0] * M for _ in range(N)]  # 거리
+        maps[0][0] = 0  # visited 처리
+
+        while q:
+            r, c = q.popleft()
+
+            if r == N - 1 and c == M - 1:
+                return distance[r][c] + 1
+
+            for i in range(4):
+                nr, nc = r + dr[i], c + dc[i]
+                if 0 <= nr < N and 0 <= nc < M and maps[nr][nc]:
+                    q.append((nr, nc))
+                    maps[nr][nc] = 0
+                    distance[nr][nc] = distance[r][c] + 1
+
+        return -1
+
+    answer = bfs()
+
+    return answer
+
+
 maps = [[1,0,1,1,1],[1,0,1,0,1],[1,0,1,1,1],[1,1,1,0,1],[0,0,0,0,1]]
 assert 11 == solution(maps)

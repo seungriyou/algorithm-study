@@ -40,6 +40,27 @@ def solution2(scoville, K):
     return -1
 
 
+def solution3(scoville, K):
+    cnt = 0
+    heapq.heapify(scoville)
+
+    if scoville[0] >= K:
+        return 0
+
+    while len(scoville) >= 2:
+        first = heapq.heappop(scoville)
+        second = heapq.heappop(scoville)
+        new_scoville = first + 2 * second
+
+        heapq.heappush(scoville, new_scoville)
+        cnt += 1
+
+        if scoville[0] >= K:
+            return cnt
+
+    return -1
+
+
 scoville = [1, 2, 3, 9, 10, 12]
 K = 7
 assert 2 == solution(scoville[:], K) == solution2(scoville[:], K)

@@ -23,3 +23,47 @@ def solution(priorities, location):
 priorities = [1, 1, 9, 1, 1, 1]
 location = 0
 assert 5 == solution(priorities, location)
+
+
+##### review #####
+def solution(priorities, location):
+    sorted_priorities = deque(sorted(priorities, reverse=True))
+    ps = deque(enumerate(priorities))
+
+    res = 0
+
+    while ps and sorted_priorities:
+        if sorted_priorities[0] == ps[0][1]:
+            res += 1
+            if ps[0][0] == location:
+                return res
+
+            sorted_priorities.popleft()
+            ps.popleft()
+
+        else:
+            ps.append(ps.popleft())
+
+
+##### review #####
+def solution(priorities, location):
+    answer = 0
+
+    sp = sorted(priorities)
+    pq = deque(enumerate(priorities))
+
+    while sp:
+        highest_priority = sp[-1]
+        idx, priority = pq[0]
+
+        if highest_priority == priority:
+            answer += 1
+            if location == idx:
+                break
+            pq.popleft()
+            sp.pop()
+
+        else:
+            pq.append(pq.popleft())
+
+    return answer

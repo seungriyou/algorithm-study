@@ -18,3 +18,17 @@ def solution(clothes):
 
 clothes = [["yellow_hat", "headgear"], ["blue_sunglasses", "eyewear"], ["green_turban", "headgear"]]
 assert 5 == solution(clothes)
+
+
+##### review #####
+def solution(clothes):
+    cnt = defaultdict(int)
+
+    for _, ctype in clothes:
+        cnt[ctype] += 1
+
+    res = 1
+    for c in cnt.values():
+        res *= (c + 1)
+
+    return res - 1

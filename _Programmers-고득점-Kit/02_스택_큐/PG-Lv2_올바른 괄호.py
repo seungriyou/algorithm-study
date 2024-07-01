@@ -15,5 +15,19 @@ def solution(s):
 
     return False if stack else True
 
+
+def solution2(s):
+    stack = []
+    for p in s:
+        if p == "(":
+            stack.append(p)
+        elif stack:
+            stack.pop()
+        else:
+            return False
+
+    return len(stack) == 0
+
+
 s = "(())()"
 assert True == solution(s)

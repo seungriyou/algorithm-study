@@ -28,3 +28,25 @@ def solution(genres, plays):
 genres = ["classic", "pop", "classic", "classic", "pop"]
 plays = [500, 600, 150, 800, 2500]
 assert [4, 1, 3, 0] == solution(genres, plays)
+
+
+##### review #####
+def solution(genres, plays):
+    from collections import defaultdict
+
+    res = []
+
+    # (play, i): play 기준 내림차순, i 기준 오름차순
+    sorted_plays = sorted(((play, i) for i, play in enumerate(plays)), key=lambda x: (-x[0], x[1]))
+
+    genre_num = defaultdict(list)  # 고유 번호
+    genre_sum = defaultdict(int)  # 노래 개수
+
+    for play, i in sorted_plays:
+        genre_num[genres[i]].append(i)
+        genre_sum[genres[i]] += play
+
+    for genre, _ in sorted(genre_sum.items(), key=lambda x: -x[1]):
+        res.extend(genre_num[genre][:2])
+
+    return res
