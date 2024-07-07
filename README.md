@@ -1,6 +1,8 @@
 # algorithm-study
 코딩테스트 대비를 위한 <mark>**알고리즘 & SQL**</mark> 문제 풀이 기록입니다. 💪🏻
 
+> [🚀 알고리즘 Tracker](https://www.notion.so/dev-study-log/c5fec6af3931467083e5508c54b57e8f?v=22c91efa56c64cbb88782a2c00c2ad20&pvs=4)
+
 | Tag  | Title                             | Link                          |
 |------|-----------------------------------|-------------------------------|
 | `SQL` | 나만의 MySQL CheatSheet              | [>>> LINK](_SQL)    |
