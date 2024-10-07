@@ -31,3 +31,24 @@ class Solution:
                 res[-1][1] = max(res[-1][1], e)
 
         return res
+
+
+###### review 2 ######
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        # non-overlapping intervals를 모을 list
+        res = []
+
+        # intervals를 오름차순 정렬
+        intervals.sort()
+
+        # intervals를 순회하며, overlap인 경우는 합치고 non-overlap인 경우는 새롭게 기록
+        for s, e in intervals:
+            # non-overlap 인 경우
+            if not res or res[-1][1] < s:
+                res.append([s, e])
+            # overlap 인 경우
+            else:
+                res[-1][1] = max(res[-1][1], e)
+
+        return res
