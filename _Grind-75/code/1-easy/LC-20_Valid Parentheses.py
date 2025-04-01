@@ -70,3 +70,49 @@ class Solution:
                 return False
 
         return len(stack) == 0
+
+###### review ######
+class Solution:
+    def isValid(self, s: str) -> bool:
+        """
+        - TC: O(n)
+        - SC: O(n)
+        """
+        pairs = {
+            ")": "(",
+            "}": "{",
+            "]": "["
+        }
+        stack = []
+
+        for p in s:
+            # 여는 괄호면 stack에 넣기
+            if p not in pairs:
+                stack.append(p)
+            # 닫는 괄호면 (1) stack이 비어있거나 (2) pair match가 되지 않으면 종료
+            # ** stack.pop() 주의!
+            elif not stack or stack.pop() != pairs[p]:
+                return False
+
+        # stack에 원소가 없어야 함
+        return len(stack) == 0
+
+    def isValid1(self, s: str) -> bool:
+        """
+        - TC: O(n)
+        - SC: O(n)
+        """
+        pairs = {
+            ")": "(",
+            "}": "{",
+            "]": "["
+        }
+        stack = []
+
+        for p in s:
+            if stack and p in pairs and stack[-1] == pairs[p]:
+                stack.pop()
+            else:
+                stack.append(p)
+
+        return len(stack) == 0

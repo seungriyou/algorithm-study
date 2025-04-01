@@ -97,3 +97,40 @@ class Solution:
             dp[i] = max(0, dp[i - 1]) + nums[i]
 
         return max(dp)
+
+###### review ######
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        """
+        [O(1) DP]
+
+        - TC: O(n)
+        - SC: O(1)
+        """
+
+        prev = max_sum = nums[0]
+
+        for i in range(1, len(nums)):
+            prev = max(prev, 0) + nums[i]
+            max_sum = max(max_sum, prev)
+
+        return max_sum
+
+    def maxSubArray1(self, nums: List[int]) -> int:
+        """
+        [O(n) DP]
+
+        dp[i] = i번째까지 봤을 때, subarry w/ the largest sum의 sum 값
+              = max(dp[i - 1], 0) + nums[i]
+
+        - TC: O(n)
+        - SC: O(n)
+        """
+
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
+
+        for i in range(1, len(nums)):
+            dp[i] = max(dp[i - 1], 0) + nums[i]
+
+        return max(dp)

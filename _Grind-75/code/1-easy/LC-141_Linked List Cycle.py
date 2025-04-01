@@ -74,3 +74,40 @@ class Solution:
 
         # fast가 None에 도달했다면 cycle 발생 X
         return False
+
+###### review ######
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        """
+        [runner 기법]
+        - TC: O(n)
+        - SC: O(1)
+        """
+        slow = fast = head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+
+            if slow == fast:
+                return True
+
+        return False
+
+    def hasCycle1(self, head: Optional[ListNode]) -> bool:
+        """
+        - TC: O(n)
+        - SC: O(n)
+        """
+        visited = set()
+        pos = head
+
+        while pos:
+            if pos in visited:
+                return True
+
+            visited.add(pos)
+
+            pos = pos.next
+
+        return False
